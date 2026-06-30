@@ -13,7 +13,7 @@
 	--main-bg-size: auto;
 	--main-bg-repeat: no-repeat;
 	--main-font-size: 14px;
-	--link-color: #62abf5;
+	--link-color: #4ade80;
 	--border-color: #333333;
 	--border-radius: 6px;
 	--hr-color: #2d2d2d;
@@ -26,12 +26,12 @@
 	--error-clr: #f5a3a8;
 	--error-bg-clr: #3b1f20;
 	--error-border-clr: #8e3135;
-	--info-clr: #62abf5;
-	--info-bg-clr: #1b3148;
+	--info-clr: #4ade80;
+	--info-bg-clr: #0f3d24;
 	--info-border-clr: #2d5c8f;
 
 	/* LOADING */
-	--loading-color: #62abf5;
+	--loading-color: #4ade80;
 	--loading-text-shadow: none;
 
 	/* LOGIN */
@@ -41,7 +41,7 @@
 	--login-border: 1px solid #404040;
 	--login-border-radius: 8px;
 
-	--spinner-color: #62abf5;
+	--spinner-color: #4ade80;
 
 	/* MENU */
 	--dropdown-menu-color: #e4e4e4;
@@ -54,21 +54,21 @@
 	/* FOLDERS */
 	--folders-color: #cccccc;
 	--folders-disabled-color: #6b6b6b;
-	--folders-selected-color: #62abf5;
-	--folders-selected-bg-color: #1b3148;
-	--folders-focused-color: #62abf5;
-	--folders-focused-bg-color: #1f3a54;
+	--folders-selected-color: #4ade80;
+	--folders-selected-bg-color: #0f3d24;
+	--folders-focused-color: #4ade80;
+	--folders-focused-bg-color: #124a2b;
 	--folders-hover-color: #ffffff;
 	--folders-hover-bg-color: #333333;
-	--folders-drop-color: #62abf5;
-	--folders-drop-bg-color: #1b3148;
+	--folders-drop-color: #4ade80;
+	--folders-drop-bg-color: #0f3d24;
 	--unread-count-color: #ffffff;
-	--unread-count-bg-color: #2b6cb0;
+	--unread-count-bg-color: #18d26e;
 
 	/* SETTINGS */
 	--settings-menu-color: #cccccc;
-	--settings-menu-selected-color: #62abf5;
-	--settings-menu-selected-bg-color: #1b3148;
+	--settings-menu-selected-color: #4ade80;
+	--settings-menu-selected-bg-color: #0f3d24;
 	--settings-menu-hover-color: #ffffff;
 	--settings-menu-hover-bg-color: #333333;
 
@@ -84,17 +84,17 @@
 
 	/* FORMS */
 	--btn-clr: #ffffff;
-	--btn-bg-clr: #2b6cb0;
-	--btn-border-clr: #2b6cb0;
+	--btn-bg-clr: #18d26e;
+	--btn-border-clr: #18d26e;
 	--btn-border-radius: 4px;
-	--btn-success-bg-clr: #2b6cb0;
+	--btn-success-bg-clr: #18d26e;
 	--btn-danger-bg-clr: #c42b31;
 
 	--input-clr: #e4e4e4;
 	--input-bg-clr: #1a1a1a;
 	--input-border-clr: #4d4d4d;
 	--input-border-radius: 4px;
-	--input-focus-border-clr: #62abf5;
+	--input-focus-border-clr: #4ade80;
 
 	/* TABLES */
 	--tr-hover-bg-clr: #2d2d2d;
@@ -102,7 +102,7 @@
 
 	/* TABS */
 	--tab-active-bg-clr: #2d2d2d;
-	--tab-hover-border-clr: #62abf5;
+	--tab-hover-border-clr: #4ade80;
 
 	--smDialogShrink: 20px;
 	--smMainShadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -128,8 +128,9 @@
    ========================================================== */
 
 /* Full page background for login */
-#rl-app {
+html, body, #rl-app {
 	background-color: #141414 !important;
+	background-image: none !important;
 }
 
 /* The login card container */
@@ -178,7 +179,7 @@
 }
 
 .LoginView input:focus {
-	border-bottom-color: #62abf5 !important;
+	border-bottom-color: #4ade80 !important;
 	outline: none !important;
 }
 
@@ -194,7 +195,7 @@
 }
 
 .LoginView .buttonLogin {
-	background: #2b6cb0 !important;
+	background: #18d26e !important;
 	border: none !important;
 	border-radius: 4px !important;
 	color: #ffffff !important;
@@ -210,7 +211,7 @@
 }
 
 .LoginView .buttonLogin:hover {
-	background: #3578b8 !important;
+	background: #1de077 !important;
 }
 
 .LoginView .e-checkbox {
@@ -237,7 +238,7 @@
 .LoginView form.submitting::after {
 	border-width: 3px !important;
 	border-color: transparent !important;
-	border-top-color: #62abf5 !important;
+	border-top-color: #4ade80 !important;
 }
 
 
@@ -264,7 +265,7 @@
 	width: auto !important;
 	padding: 6px 14px !important;
 	border-radius: 4px !important;
-	background: #2b6cb0 !important;
+	background: #18d26e !important;
 	border: none !important;
 	color: #ffffff !important;
 	font-weight: 600 !important;
@@ -274,7 +275,7 @@
 }
 
 #rl-left .buttonCompose:hover {
-	background: #3578b8 !important;
+	background: #1de077 !important;
 }
 
 .b-folders li a {
@@ -290,15 +291,15 @@
 }
 
 .b-folders li a.selectable.selected {
-	background-color: #1b3148 !important;
-	color: #62abf5 !important;
+	background-color: #0f3d24 !important;
+	color: #4ade80 !important;
 	font-weight: 600 !important;
 }
 
 /* Unread badge */
 .b-folders .b-folders-system a[data-unread]::after,
 .b-folders .b-folders-user a[data-unread]:not(.system)::after {
-	background-color: #2b6cb0 !important;
+	background-color: #18d26e !important;
 	color: #ffffff !important;
 	font-size: 11px !important;
 	font-weight: 600 !important;
@@ -342,13 +343,13 @@
 .messageListItem.focused,
 .messageListItem.selected,
 .messageListItem.checked {
-	background-color: #1b3148 !important;
-	border-left-color: #62abf5 !important;
+	background-color: #0f3d24 !important;
+	border-left-color: #4ade80 !important;
 }
 
 .messageListItem.unseen {
 	font-weight: 600 !important;
-	border-left-color: #62abf5 !important;
+	border-left-color: #4ade80 !important;
 }
 
 .messageList .b-footer {
@@ -394,12 +395,12 @@
 }
 
 .btn.btn-success {
-	background: #2b6cb0 !important;
-	border-color: #2b6cb0 !important;
+	background: #18d26e !important;
+	border-color: #18d26e !important;
 	color: #ffffff !important;
 }
 .btn.btn-success:hover {
-	background: #3578b8 !important;
+	background: #1de077 !important;
 }
 
 .btn .icon-spinner {
@@ -511,7 +512,7 @@ input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="search"]:focus,
 textarea:focus {
-	border-color: #62abf5 !important;
+	border-color: #4ade80 !important;
 }
 
 select, .select {
@@ -542,8 +543,8 @@ select, .select {
 
 .tabs > [id^="tab"]:checked + label {
 	background: transparent !important;
-	border-bottom: 2px solid #62abf5 !important;
-	color: #62abf5 !important;
+	border-bottom: 2px solid #4ade80 !important;
+	color: #4ade80 !important;
 	opacity: 1 !important;
 }
 
@@ -611,7 +612,7 @@ input[type="search"]::-webkit-search-decoration {
 
 .icon-spinner {
 	border-color: #4d4d4d !important;
-	border-top-color: #62abf5 !important;
+	border-top-color: #4ade80 !important;
 }
 
 
@@ -628,7 +629,7 @@ input[type="search"]::-webkit-search-decoration {
 
 /* Compose header bar */
 #V-PopupsCompose > header {
-	background: #2b6cb0 !important;
+	background: #18d26e !important;
 	color: #ffffff !important;
 	padding: 10px 16px !important;
 	border-bottom: none !important;
@@ -683,7 +684,7 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 #V-PopupsCompose .b-header input[type="text"]:focus {
-	border-color: #62abf5 !important;
+	border-color: #4ade80 !important;
 }
 
 /* Compose tabs */
@@ -708,8 +709,8 @@ input[type="search"]::-webkit-search-decoration {
 
 /* Send button */
 #V-PopupsCompose .btn.btn-success {
-	background: #2b6cb0 !important;
-	border-color: #2b6cb0 !important;
+	background: #18d26e !important;
+	border-color: #18d26e !important;
 	color: #ffffff !important;
 	padding: 8px 20px !important;
 	font-weight: 600 !important;
@@ -717,7 +718,7 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 #V-PopupsCompose .btn.btn-success:hover {
-	background: #3578b8 !important;
+	background: #1de077 !important;
 }
 
 /* Attachment area */
