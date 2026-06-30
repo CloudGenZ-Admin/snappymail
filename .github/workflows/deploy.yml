@@ -25,22 +25,67 @@ jobs:
 
       - name: Remove old themes and apply custom ones
         run: |
-          # Remove all default themes from the release
           rm -rf release/snappymail/v/${SNAPPYMAIL_VERSION}/themes/*
-          # Copy our custom themes
           cp -r custom/my-overrides/snappymail/* release/snappymail/ 2>/dev/null || true
 
-      - name: Apply plugin customizations
+      - name: Include plugins for setup script to install
         run: |
-          # Plugins go into the data directory, NOT the webroot
-          mkdir -p plugin-deploy
-          cp -r custom/my-overrides/plugins/* plugin-deploy/ 2>/dev/null || true
+          mkdir -p release/_plugins_source
+          cp -r custom/my-overrides/plugins/* release/_plugins_source/
 
-      - name: Prepare cache clear
+      - name: Create plugin installer script
         run: |
-          # Create empty dir - deploying it with dangerous-clean-slate wipes the cache
-          mkdir -p empty-cache
-          touch empty-cache/.gitkeep
+          cat > release/setup-plugins.php << 'PHPEOF'
+          <?php
+          // One-time script: copies plugins to the correct data directory
+          // Visit https://mail.cloudgenz.com/setup-plugins.php to run
+          $dataPath = '/home/u930449354/snappymail-data/_data_/_default_/plugins/';
+          $sourcePath = __DIR__ . '/_plugins_source/';
+
+          if (!is_dir($sourcePath)) {
+              die('No plugins source found.');
+          }
+
+          // Create plugins directory if needed
+          if (!is_dir($dataPath)) {
+              mkdir($dataPath, 0755, true);
+          }
+
+          // Copy recursively
+          function copyDir($src, $dst) {
+              if (!is_dir($dst)) mkdir($dst, 0755, true);
+              foreach (scandir($src) as $file) {
+                  if ($file === '.' || $file === '..') continue;
+                  $srcPath = $src . '/' . $file;
+                  $dstPath = $dst . '/' . $file;
+                  if (is_dir($srcPath)) {
+                      copyDir($srcPath, $dstPath);
+                  } else {
+                      copy($srcPath, $dstPath);
+                  }
+              }
+          }
+
+          copyDir($sourcePath, $dataPath);
+
+          // Clear CSS cache
+          $cachePath = '/home/u930449354/snappymail-data/_data_/_default_/cache/';
+          if (is_dir($cachePath)) {
+              foreach (new RecursiveIteratorIterator(
+                  new RecursiveDirectoryIterator($cachePath, FilesystemIterator::SKIP_DOTS),
+                  RecursiveIteratorIterator::CHILD_FIRST
+              ) as $item) {
+                  $item->isDir() ? rmdir($item) : unlink($item);
+              }
+          }
+
+          echo "Done! Plugins installed and cache cleared.\n";
+          echo "Installed to: " . $dataPath . "\n";
+          echo "Files:\n";
+          foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dataPath, FilesystemIterator::SKIP_DOTS)) as $file) {
+              echo "  " . str_replace($dataPath, '', $file) . "\n";
+          }
+          PHPEOF
 
       - name: Set data path
         run: |
@@ -52,7 +97,7 @@ jobs:
       - name: Remove data folder from deploy
         run: rm -rf release/data
 
-      - name: Deploy app via FTP
+      - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
@@ -60,22 +105,3 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           server-dir: /public_html/
           local-dir: ./release/
-
-      - name: Deploy plugins via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
-          server-dir: snappymail-data/_data_/_default_/plugins/
-          local-dir: ./plugin-deploy/
-
-      - name: Clear SnappyMail CSS cache
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
-          server-dir: snappymail-data/_data_/_default_/cache/
-          local-dir: ./empty-cache/
-          dangerous-clean-slate: true
