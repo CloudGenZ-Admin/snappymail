@@ -1,10 +1,8 @@
 /*
  * Outlook Modern Dark Theme for SnappyMail
- * Complete UI revamp: Fluent UI 2 dark design system
- * Deep surfaces, refined interactions, premium dark feel
+ * Clean, professional Fluent UI 2 dark design
  */
 
-/* ===== DESIGN TOKENS ===== */
 :root {
 	color-scheme: dark;
 
@@ -17,20 +15,17 @@
 	--main-font-size: 14px;
 	--link-color: #62abf5;
 	--border-color: #333333;
-	--border-radius: 8px;
+	--border-radius: 6px;
 	--hr-color: #2d2d2d;
 
 	--panel-bg-clr: #242424;
 
-	/* STATUS COLORS */
 	--warning-clr: #f5d565;
 	--warning-bg-clr: #3d3120;
 	--warning-border-clr: #9e7e23;
-
 	--error-clr: #f5a3a8;
 	--error-bg-clr: #3b1f20;
 	--error-border-clr: #8e3135;
-
 	--info-clr: #62abf5;
 	--info-bg-clr: #1b3148;
 	--info-border-clr: #2d5c8f;
@@ -42,9 +37,9 @@
 	/* LOGIN */
 	--login-color: #e4e4e4;
 	--login-bg-color: #2d2d2d;
-	--login-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
-	--login-border: 1px solid rgba(255, 255, 255, 0.06);
-	--login-border-radius: 12px;
+	--login-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4);
+	--login-border: 1px solid #404040;
+	--login-border-radius: 8px;
 
 	--spinner-color: #62abf5;
 
@@ -84,21 +79,21 @@
 	/* DIALOGS */
 	--dialog-clr: #e4e4e4;
 	--dialog-bg-clr: #2d2d2d;
-	--dialog-border-clr: rgba(255, 255, 255, 0.08);
-	--dialog-border-radius: 12px;
+	--dialog-border-clr: #404040;
+	--dialog-border-radius: 8px;
 
 	/* FORMS */
 	--btn-clr: #ffffff;
 	--btn-bg-clr: #2b6cb0;
 	--btn-border-clr: #2b6cb0;
-	--btn-border-radius: 6px;
+	--btn-border-radius: 4px;
 	--btn-success-bg-clr: #2b6cb0;
 	--btn-danger-bg-clr: #c42b31;
 
 	--input-clr: #e4e4e4;
 	--input-bg-clr: #1a1a1a;
 	--input-border-clr: #4d4d4d;
-	--input-border-radius: 6px;
+	--input-border-radius: 4px;
 	--input-focus-border-clr: #62abf5;
 
 	/* TABLES */
@@ -110,19 +105,17 @@
 	--tab-hover-border-clr: #62abf5;
 
 	--smDialogShrink: 20px;
-	--smMainShadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	--smMainShadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 
 /* ==========================================================
-   GLOBAL RESET & TYPOGRAPHY
+   GLOBAL
    ========================================================== */
 
 #rl-app {
-	font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif !important;
+	font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif !important;
 	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	letter-spacing: -0.01em;
 }
 
 #rl-content:not([hidden]) {
@@ -131,51 +124,27 @@
 
 
 /* ==========================================================
-   LOGIN PAGE - PREMIUM DARK DESIGN
+   LOGIN PAGE - CLEAN ELEVATED CARD (DARK)
    ========================================================== */
 
-#V-Login, #V-AdminLogin {
-	max-width: 420px;
-}
-
 .LoginView {
-	background: linear-gradient(145deg, #0d1b2a 0%, #1b2838 50%, #0a1929 100%) !important;
-}
-
-.LoginView::before {
-	content: '';
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background:
-		radial-gradient(ellipse at 30% 40%, rgba(43, 108, 176, 0.15) 0%, transparent 50%),
-		radial-gradient(ellipse at 70% 80%, rgba(98, 171, 245, 0.08) 0%, transparent 40%);
-	pointer-events: none;
-	z-index: 0;
+	background: #141414 !important;
 }
 
 .LoginView .descWrapper {
 	color: #e4e4e4 !important;
-	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
-	font-size: 180% !important;
+	font-size: 160% !important;
 	font-weight: 300 !important;
+	text-shadow: none !important;
 }
 
 .LoginView form {
-	background: rgba(45, 45, 45, 0.92) !important;
-	backdrop-filter: blur(20px) saturate(150%);
-	-webkit-backdrop-filter: blur(20px) saturate(150%);
-	border: 1px solid rgba(255, 255, 255, 0.08) !important;
-	border-radius: 16px !important;
-	box-shadow:
-		0 20px 60px rgba(0, 0, 0, 0.5),
-		0 8px 24px rgba(0, 0, 0, 0.3),
-		inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
-	padding: 44px 40px 36px !important;
+	background: #2d2d2d !important;
+	border: 1px solid #404040 !important;
+	border-radius: 8px !important;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+	padding: 40px 36px 32px !important;
 	color: #e4e4e4 !important;
-	transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 .LoginView form * {
@@ -187,16 +156,15 @@
 	border-color: #c42b31 !important;
 }
 
-/* Login inputs */
 .LoginView input {
 	background: #1a1a1a !important;
-	border: 2px solid #404040 !important;
-	border-radius: 8px !important;
+	border: 1px solid #4d4d4d !important;
+	border-radius: 4px !important;
 	color: #e4e4e4 !important;
-	font-size: 15px !important;
-	height: 46px !important;
-	padding: 0 16px 0 44px !important;
-	transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease !important;
+	font-size: 14px !important;
+	height: 36px !important;
+	padding: 0 12px 0 36px !important;
+	transition: border-color 0.15s ease !important;
 }
 
 .LoginView input::placeholder {
@@ -205,76 +173,55 @@
 
 .LoginView input:focus,
 .LoginView input:hover {
-	background: #242424 !important;
 	border-color: #62abf5 !important;
-	box-shadow: 0 0 0 2px rgba(98, 171, 245, 0.15) !important;
 }
 
-/* Login form icons */
 .LoginView .controls > .fontastic:first-child {
-	font-size: 18px !important;
-	color: #8a8a8a !important;
-	left: 14px !important;
-	line-height: 46px !important;
-}
-
-/* Login button */
-.LoginView .buttonLogin,
-.LoginView .btn {
-	background: linear-gradient(180deg, #3578b8 0%, #2b6cb0 100%) !important;
-	border: none !important;
-	border-radius: 8px !important;
-	color: #ffffff !important;
 	font-size: 15px !important;
+	color: #8a8a8a !important;
+	left: 10px !important;
+	line-height: 36px !important;
+}
+
+.LoginView .buttonLogin,
+.LoginView form > div > .btn {
+	background: #2b6cb0 !important;
+	border: none !important;
+	border-radius: 4px !important;
+	color: #ffffff !important;
+	font-size: 14px !important;
 	font-weight: 600 !important;
-	height: 46px !important;
-	letter-spacing: 0.02em !important;
+	height: 36px !important;
 	text-transform: none !important;
-	transition: all 0.15s ease !important;
-	box-shadow: 0 2px 8px rgba(43, 108, 176, 0.3) !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
 }
 
-.LoginView .buttonLogin:hover,
-.LoginView .btn:hover {
-	background: linear-gradient(180deg, #4088c8 0%, #3578b8 100%) !important;
-	box-shadow: 0 4px 16px rgba(43, 108, 176, 0.4) !important;
-	transform: translateY(-1px);
+.LoginView .buttonLogin:hover {
+	background: #3578b8 !important;
 }
 
-.LoginView .buttonLogin:active,
-.LoginView .btn:active {
-	transform: translateY(0) !important;
-	box-shadow: 0 1px 4px rgba(43, 108, 176, 0.2) !important;
-}
-
-/* Remember me checkbox area */
 .LoginView .e-checkbox {
 	font-size: 13px !important;
-	color: #a0a0a0 !important;
 }
 
-/* Language button */
 .LoginView .language-button {
 	opacity: 0.5 !important;
-	transition: opacity 0.15s !important;
 }
 .LoginView .language-button:hover {
 	opacity: 1 !important;
 }
 
-/* Login error alert */
 .LoginView .alert {
 	background: #3b1f20 !important;
 	border: 1px solid #8e3135 !important;
-	border-radius: 8px !important;
-	padding: 12px 16px !important;
-	color: #f5a3a8 !important;
+	border-radius: 4px !important;
+	padding: 10px 14px !important;
 }
 .LoginView .alert * {
 	color: #f5a3a8 !important;
 }
 
-/* Submitting spinner */
 .LoginView form.submitting::after {
 	border-width: 3px !important;
 	border-color: transparent !important;
@@ -283,7 +230,7 @@
 
 
 /* ==========================================================
-   SIDEBAR / FOLDER PANEL
+   SIDEBAR
    ========================================================== */
 
 #rl-left {
@@ -291,39 +238,34 @@
 	border-right: 1px solid #333333 !important;
 }
 
-/* Compose button */
 #rl-left .b-toolbar {
-	padding: 16px 12px !important;
+	padding: 12px 8px !important;
 }
 
-#rl-left .buttonCompose,
-.b-folders .b-toolbar .btn {
-	background: linear-gradient(180deg, #3578b8 0%, #2b6cb0 100%) !important;
+/* FIX: Compose button text cutoff */
+#rl-left .buttonCompose {
+	max-height: none !important;
+	overflow: visible !important;
+	height: auto !important;
+	padding: 8px 14px !important;
+	border-radius: 4px !important;
+	background: #2b6cb0 !important;
 	border: none !important;
-	border-radius: 8px !important;
 	color: #ffffff !important;
 	font-weight: 600 !important;
-	padding: 10px 16px !important;
-	box-shadow: 0 2px 6px rgba(43, 108, 176, 0.25) !important;
-	transition: all 0.15s ease !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
 }
 
 #rl-left .buttonCompose:hover {
-	box-shadow: 0 4px 12px rgba(43, 108, 176, 0.35) !important;
-	transform: translateY(-1px);
-}
-
-/* Folder tree */
-.b-folders .b-content {
-	color: #cccccc !important;
+	background: #3578b8 !important;
 }
 
 .b-folders li a {
-	border-radius: 6px !important;
-	margin: 1px 8px !important;
-	padding: 8px 12px !important;
+	border-radius: 4px !important;
+	margin: 1px 6px !important;
+	padding: 6px 10px !important;
 	border-left: none !important;
-	transition: all 0.1s ease !important;
 	line-height: 1.8em !important;
 }
 
@@ -344,33 +286,12 @@
 	color: #ffffff !important;
 	font-size: 11px !important;
 	font-weight: 600 !important;
-	min-width: 20px !important;
-	height: 20px !important;
-	line-height: 20px !important;
-	border-radius: 10px !important;
-	padding: 0 6px !important;
+	min-width: 18px !important;
+	height: 18px !important;
+	line-height: 18px !important;
+	border-radius: 9px !important;
+	padding: 0 5px !important;
 	text-shadow: none !important;
-	right: 8px !important;
-}
-
-/* Folder footer */
-.b-folders .b-footer {
-	border-top: 1px solid #333333 !important;
-	padding: 12px !important;
-}
-
-/* Search in folders */
-#rl-left .search-input-wrp input {
-	border-radius: 8px !important;
-	border: 1px solid #404040 !important;
-	padding: 8px 12px !important;
-	background: #1a1a1a !important;
-	color: #e4e4e4 !important;
-	transition: border-color 0.15s !important;
-}
-#rl-left .search-input-wrp input:focus {
-	border-color: #62abf5 !important;
-	box-shadow: 0 0 0 2px rgba(98, 171, 245, 0.12) !important;
 }
 
 
@@ -378,31 +299,24 @@
    MESSAGE LIST & TOOLBAR
    ========================================================== */
 
-/* Top toolbar */
 .messageList .second-toolbar {
 	background: #242424 !important;
 	border-bottom: 1px solid #333333 !important;
-	border-radius: 12px 12px 0 0 !important;
-	padding: 8px 12px !important;
-	gap: 4px;
+	border-radius: 6px 6px 0 0 !important;
+	padding: 8px !important;
 }
 
-/* Message list container */
 .messageList {
-	border: none !important;
-	border-radius: 12px !important;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.4) !important;
-	overflow: hidden;
+	border: 1px solid #333333 !important;
+	border-radius: 6px !important;
+	box-shadow: none !important;
 	background-color: #242424 !important;
 }
 
-/* Message list items */
 .messageListItem {
 	border-bottom: 1px solid #2d2d2d !important;
 	border-left: 3px solid transparent !important;
-	padding: 12px 16px !important;
-	transition: all 0.1s ease !important;
-	cursor: pointer;
+	transition: background-color 0.1s !important;
 }
 
 .messageListItem:hover {
@@ -420,41 +334,31 @@
 	font-weight: 600 !important;
 }
 
-/* Bottom toolbar / footer */
 .messageList .b-footer {
 	background: #1f1f1f !important;
 	border-top: 1px solid #333333 !important;
-	border-radius: 0 0 12px 12px !important;
-	padding: 8px 12px !important;
-}
-
-/* Paginator */
-.e-paginator a {
-	color: #62abf5 !important;
+	border-radius: 0 0 6px 6px !important;
 }
 
 
 /* ==========================================================
-   BUTTONS - FLUENT UI 2 DARK STYLE
+   BUTTONS - FIX TEXT CUTOFF
    ========================================================== */
 
 .btn {
-	border-radius: 6px !important;
+	border-radius: 4px !important;
 	font-weight: 500 !important;
-	font-size: 13px !important;
-	padding: 6px 12px !important;
-	transition: all 0.1s ease !important;
+	text-transform: none !important;
 	box-shadow: none !important;
 	text-shadow: none !important;
-	text-transform: none !important;
-	border: 1px solid transparent !important;
+	overflow: visible !important;
+	white-space: nowrap !important;
 }
 
-/* Default/secondary buttons */
 .btn:not(.btn-success):not(.btn-warning):not(.btn-danger) {
 	background: #333333 !important;
 	color: #e4e4e4 !important;
-	border-color: #4d4d4d !important;
+	border: 1px solid #4d4d4d !important;
 }
 
 .btn:not(.btn-success):not(.btn-warning):not(.btn-danger):hover {
@@ -462,17 +366,10 @@
 	border-color: #5a5a5a !important;
 }
 
-.btn:not(.btn-success):not(.btn-warning):not(.btn-danger):active {
-	background: #292929 !important;
-}
-
-/* Transparent/icon buttons */
 .btn.btn-transparent {
 	background: transparent !important;
 	border-color: transparent !important;
-	border-radius: 6px !important;
 	opacity: 0.7 !important;
-	padding: 6px 8px !important;
 	color: #cccccc !important;
 }
 
@@ -481,7 +378,6 @@
 	opacity: 1 !important;
 }
 
-/* Primary buttons */
 .btn.btn-success {
 	background: #2b6cb0 !important;
 	border-color: #2b6cb0 !important;
@@ -491,13 +387,6 @@
 	background: #3578b8 !important;
 }
 
-/* Danger button */
-.btn.btn-danger {
-	background: #c42b31 !important;
-	color: #ffffff !important;
-}
-
-/* Spinner in button */
 .btn .icon-spinner {
 	border-color: #4d4d4d !important;
 	border-top-color: #e4e4e4 !important;
@@ -505,26 +394,22 @@
 
 
 /* ==========================================================
-   DROPDOWN MENUS - ELEVATED & DARK
+   DROPDOWN MENUS
    ========================================================== */
 
 .dropdown-menu {
 	background: #2d2d2d !important;
-	border: 1px solid rgba(255, 255, 255, 0.08) !important;
-	border-radius: 8px !important;
-	box-shadow:
-		0 8px 32px rgba(0, 0, 0, 0.5),
-		0 2px 8px rgba(0, 0, 0, 0.3) !important;
+	border: 1px solid #404040 !important;
+	border-radius: 6px !important;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
 	padding: 4px !important;
-	margin-top: 4px !important;
 }
 
 .dropdown-menu a,
 .dropdown-menu li a {
-	border-radius: 4px !important;
-	padding: 8px 12px !important;
+	border-radius: 3px !important;
+	padding: 7px 12px !important;
 	font-size: 13px !important;
-	transition: background-color 0.1s !important;
 	color: #e4e4e4 !important;
 }
 
@@ -542,40 +427,60 @@
 
 
 /* ==========================================================
-   SYSTEM DROPDOWN (Account menu)
+   MESSAGE VIEW - FIX REPLY/MENU BUTTON POSITION
    ========================================================== */
 
-#V-SystemDropDown .accountPlace {
-	border-right-color: #404040 !important;
-	font-weight: 500 !important;
-	color: #cccccc !important;
+#V-MailMessageView {
+	border-left: 1px solid #333333 !important;
 }
 
-#V-SystemDropDown {
-	padding: 8px 16px !important;
+.messageView {
+	border: 1px solid #333333 !important;
+	border-radius: 6px !important;
+}
+
+.messageView .message-fixed-button-toolbar {
+	position: absolute !important;
+	top: 8px !important;
+	right: 8px !important;
+	z-index: 100 !important;
+	display: flex !important;
+	gap: 4px !important;
+}
+
+.messageView .message-fixed-button-toolbar .btn {
+	padding: 4px 8px !important;
+	font-size: 13px !important;
+}
+
+.messageView .messageItemHeader {
+	background: #1f1f1f !important;
+	border-bottom: 1px solid #333333 !important;
+	padding: 12px !important;
+}
+
+#messageItem .b-text-part blockquote {
+	border-color: #4d4d4d !important;
 }
 
 
 /* ==========================================================
-   INPUT FIELDS - MODERN DARK STYLE
+   INPUT FIELDS
    ========================================================== */
 
 input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="search"],
-input[type="number"],
 textarea,
 select,
 .select {
 	background: #1a1a1a !important;
 	border: 1px solid #4d4d4d !important;
-	border-radius: 6px !important;
+	border-radius: 4px !important;
 	color: #e4e4e4 !important;
-	font-size: 14px !important;
-	padding: 8px 12px !important;
-	transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
 	outline: none !important;
+	transition: border-color 0.15s ease !important;
 }
 
 input[type="text"]:focus,
@@ -584,45 +489,18 @@ input[type="password"]:focus,
 input[type="search"]:focus,
 textarea:focus {
 	border-color: #62abf5 !important;
-	box-shadow: 0 0 0 2px rgba(98, 171, 245, 0.15) !important;
 }
 
-/* Select dropdown arrow (light for dark bg) */
 select, .select {
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23cccccc' d='M2.5 4.5L6 8l3.5-3.5h-7z'/%3E%3C/svg%3E") !important;
 	background-repeat: no-repeat !important;
 	background-position: right 10px center !important;
-	padding-right: 32px !important;
 	appearance: none !important;
-	-webkit-appearance: none !important;
 }
 
 
 /* ==========================================================
-   ICON MODERNIZATION
-   ========================================================== */
-
-.fontastic,
-[class^="icon-"],
-[class*=" icon-"] {
-	font-size: 16px !important;
-	opacity: 0.85;
-}
-
-.btn-toolbar .btn {
-	margin: 0 2px !important;
-}
-
-/* Spinner */
-.icon-spinner {
-	border-width: 2px !important;
-	border-color: #4d4d4d !important;
-	border-top-color: #62abf5 !important;
-}
-
-
-/* ==========================================================
-   TABS - PIVOT DARK STYLE
+   TABS
    ========================================================== */
 
 .tabs > label {
@@ -630,176 +508,77 @@ select, .select {
 	border-bottom: 2px solid transparent !important;
 	border-radius: 0 !important;
 	color: #a0a0a0 !important;
-	font-weight: 500 !important;
 	opacity: 0.7 !important;
-	padding: 10px 16px !important;
-	transition: all 0.15s !important;
+	padding: 8px 14px !important;
 }
 
 .tabs > label:hover {
 	opacity: 1 !important;
 	color: #e4e4e4 !important;
-	border-bottom-color: #4d4d4d !important;
 }
 
 .tabs > [id^="tab"]:checked + label {
 	background: transparent !important;
 	border-bottom: 2px solid #62abf5 !important;
 	color: #62abf5 !important;
-	font-weight: 600 !important;
 	opacity: 1 !important;
 }
 
 
 /* ==========================================================
-   DIALOGS / MODALS - ELEVATED DARK
+   DIALOGS
    ========================================================== */
 
 dialog {
-	border: 1px solid rgba(255, 255, 255, 0.06) !important;
-	border-radius: 12px !important;
-	box-shadow:
-		0 16px 64px rgba(0, 0, 0, 0.6),
-		0 4px 16px rgba(0, 0, 0, 0.4) !important;
-}
-
-dialog > header {
-	padding: 16px 20px !important;
-	border-bottom: 1px solid #333333 !important;
-}
-
-dialog > header h3 {
-	font-size: 18px !important;
-	font-weight: 600 !important;
-}
-
-dialog .modal-body {
-	padding: 20px !important;
-}
-
-dialog > footer {
-	padding: 12px 20px !important;
-	border-top: 1px solid #333333 !important;
+	border: 1px solid #404040 !important;
+	border-radius: 8px !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
 }
 
 dialog::backdrop {
-	background: rgba(0, 0, 0, 0.7) !important;
-	backdrop-filter: blur(4px) !important;
+	background: rgba(0, 0, 0, 0.6) !important;
 }
 
 
 /* ==========================================================
-   SCROLLBARS - DARK MINIMAL
+   SCROLLBARS
    ========================================================== */
 
 ::-webkit-scrollbar {
 	width: 8px;
-	height: 8px;
 }
-
 ::-webkit-scrollbar-track {
 	background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
 	background: #4d4d4d;
 	border-radius: 4px;
-	border: 2px solid transparent;
-	background-clip: padding-box;
 }
-
 ::-webkit-scrollbar-thumb:hover {
 	background: #6b6b6b;
-	border: 2px solid transparent;
-	background-clip: padding-box;
 }
 
 
 /* ==========================================================
-   MESSAGE VIEW
+   SYSTEM DROPDOWN
    ========================================================== */
 
-#V-MailMessageView {
-	border-left: 1px solid #333333 !important;
-}
-
-.messageView .b-message {
-	background: #242424;
-}
-
-.messageView .top-toolbar {
-	padding: 12px 16px !important;
-	border-bottom: 1px solid #333333 !important;
-}
-
-/* Blockquotes in messages */
-#messageItem .b-text-part blockquote {
-	border-color: #4d4d4d !important;
+#V-SystemDropDown .accountPlace {
+	border-right-color: #404040 !important;
+	color: #cccccc !important;
 }
 
 
 /* ==========================================================
-   SETTINGS PANEL
+   MISC
    ========================================================== */
 
-#V-SettingsPane .legend {
-	font-weight: 600 !important;
-	font-size: 140% !important;
-	border-bottom-color: #333333 !important;
-}
-
-/* Settings about logo */
 #V-Settings-About .rl-logo {
 	filter: invert(1) !important;
 	opacity: 0.7;
 }
 
-
-/* ==========================================================
-   MISC POLISH
-   ========================================================== */
-
-/* Checkbox modernization */
-.e-checkbox.material-design > div > div {
-	border-color: #8a8a8a !important;
-	border-radius: 3px !important;
-}
-
-/* Table hover rows */
-.table-hover tbody tr:hover td,
-.table-hover tbody tr:hover th {
-	background-color: #2d2d2d !important;
-}
-
-.table-striped tbody tr:nth-child(2n+1) td,
-.table-striped tbody tr:nth-child(2n+1) th {
-	background-color: #1f1f1f !important;
-}
-
-/* Alert boxes */
-.alert {
-	border-radius: 8px !important;
-	padding: 12px 16px !important;
-}
-
-/* Smooth transitions */
-#rl-left {
-	transition: width 0.15s ease !important;
-}
-
-/* Group label in message list */
-.messageList .groupLabel {
-	background: #1f1f1f !important;
-	font-weight: 600 !important;
-	font-size: 11px !important;
-	text-transform: uppercase !important;
-	letter-spacing: 0.05em !important;
-	padding: 6px 16px !important;
-	color: #8a8a8a !important;
-}
-
-/* Dropdown toggle */
-#top-system-dropdown-id::after,
-#button-add-prop-dropdown-id::after {
-	opacity: 0.6;
+.icon-spinner {
+	border-color: #4d4d4d !important;
+	border-top-color: #62abf5 !important;
 }

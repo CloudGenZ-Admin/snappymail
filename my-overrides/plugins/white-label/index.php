@@ -5,20 +5,18 @@
  *
  * Provides per-client branding (logo, colors, company name) based on
  * the subdomain or email domain used to access the webmail.
- *
- * Client configurations are stored in clients.json in this plugin's directory.
  */
 class WhiteLabelPlugin extends \RainLoop\Plugins\AbstractPlugin
 {
 	const
 		NAME        = 'White Label Branding',
 		AUTHOR      = 'Custom',
-		VERSION     = '1.0',
-		RELEASE     = '2024-01-01',
+		VERSION     = '1.1',
+		RELEASE     = '2024-06-30',
 		REQUIRED    = '2.28.0',
 		CATEGORY    = 'General',
 		LICENSE     = 'MIT',
-		DESCRIPTION = 'Dynamic per-client branding based on subdomain or email domain. Supports custom logos, colors, and company names for white-label email service.';
+		DESCRIPTION = 'Dynamic per-client branding based on subdomain or email domain.';
 
 	private ?array $clientsConfig = null;
 
@@ -28,12 +26,8 @@ class WhiteLabelPlugin extends \RainLoop\Plugins\AbstractPlugin
 		$this->addHook('main.content-security-policy', 'adjustCSP');
 		$this->addJs('js/white-label.js');
 		$this->addCss('css/white-label.css');
-		$this->addPartHook('white-label-config', 'serviceClientConfig');
 	}
 
-	/**
-	 * Load all client configurations from the JSON file.
-	 */
 	private function getClientsConfig(): array
 	{
 		if ($this->clientsConfig === null) {
@@ -48,18 +42,18 @@ class WhiteLabelPlugin extends \RainLoop\Plugins\AbstractPlugin
 		return $this->clientsConfig;
 	}
 
-	/**
-	 * Detect the current client based on the HTTP host (subdomain matching).
-	 * Falls back to 'default' config if no match.
-	 */
 	private function detectClient(): ?array
 	{
 		$clients = $this->getClientsConfig();
-		$host = \strtolower($_SERVER['HTTP_HOST'] ?? '');
+		$host = \strtolower(\trim($_SERVER['HTTP_HOST'] ?? '', ' \t\n\r\0\x0B'));
+
+		// Remove port if present
+		$host = \explode(':', $host)[0];
 
 		// Try exact host match first
 		foreach ($clients as $clientId => $config) {
 			if ($clientId === 'default') continue;
+			if (!is_array($config)) continue;
 			$domains = $config['domains'] ?? [];
 			foreach ($domains as $domain) {
 				if (\strtolower($domain) === $host) {
@@ -68,11 +62,11 @@ class WhiteLabelPlugin extends \RainLoop\Plugins\AbstractPlugin
 			}
 		}
 
-		// Try subdomain prefix match (e.g., "clientA.mail.example.com" matches clientA)
+		// Try subdomain prefix match
 		$parts = \explode('.', $host);
 		if (\count($parts) > 2) {
 			$subdomain = $parts[0];
-			if (isset($clients[$subdomain])) {
+			if (isset($clients[$subdomain]) && $subdomain !== 'default') {
 				return \array_merge(['_id' => $subdomain], $clients[$subdomain]);
 			}
 		}
@@ -85,18 +79,17 @@ class WhiteLabelPlugin extends \RainLoop\Plugins\AbstractPlugin
 		return null;
 	}
 
-	/**
-	 * Detect client from email domain (used post-login).
-	 */
 	private function detectClientByEmail(string $email): ?array
 	{
 		$clients = $this->getClientsConfig();
-		$emailDomain = \strtolower(\explode('@', $email)[1] ?? '');
+		$parts = \explode('@', $email);
+		$emailDomain = isset($parts[1]) ? \strtolower($parts[1]) : '';
 
 		if (!$emailDomain) return null;
 
 		foreach ($clients as $clientId => $config) {
 			if ($clientId === 'default') continue;
+			if (!is_array($config)) continue;
 			$emailDomains = $config['email_domains'] ?? [];
 			foreach ($emailDomains as $domain) {
 				if (\strtolower($domain) === $emailDomain) {
@@ -109,63 +102,43 @@ class WhiteLabelPlugin extends \RainLoop\Plugins\AbstractPlugin
 	}
 
 	/**
-	 * Inject client branding data into the app data sent to the browser.
+	 * Inject client branding into app data — this is available to JS immediately.
 	 */
 	public function filterAppData(bool $bAdmin, array &$aAppData): void
 	{
 		$client = $this->detectClient();
 
-		// If user is authenticated, try to match by email domain too
+		// If user is authenticated, try email domain match too
 		if (!$bAdmin && !empty($aAppData['Auth'])) {
 			$email = $aAppData['Email'] ?? '';
-			$emailClient = $this->detectClientByEmail($email);
-			if ($emailClient) {
-				$client = $emailClient;
+			if ($email) {
+				$emailClient = $this->detectClientByEmail($email);
+				if ($emailClient) {
+					$client = $emailClient;
+				}
 			}
 		}
 
 		if ($client) {
-			// Expose branding data to JavaScript
 			$aAppData['WhiteLabel'] = [
-				'clientId'     => $client['_id'],
+				'clientId'     => $client['_id'] ?? 'default',
 				'companyName'  => $client['company_name'] ?? '',
 				'logoUrl'      => $client['logo_url'] ?? '',
-				'logoWidth'    => $client['logo_width'] ?? '200px',
+				'logoWidth'    => $client['logo_width'] ?? '180px',
 				'faviconUrl'   => $client['favicon_url'] ?? '',
-				'primaryColor' => $client['primary_color'] ?? '#0078d4',
-				'accentColor'  => $client['accent_color'] ?? '#106ebe',
-				'loginBg'      => $client['login_background'] ?? '',
+				'primaryColor' => $client['primary_color'] ?? '#0f6cbd',
+				'accentColor'  => $client['accent_color'] ?? '#115ea3',
 				'loginBgColor' => $client['login_bg_color'] ?? '',
-				'darkMode'     => $client['dark_mode'] ?? false,
 			];
 		}
 	}
 
-	/**
-	 * Serve client config as a JSON endpoint for the JS to fetch on page load.
-	 * This is needed because filter.app-data fires after the page shell loads,
-	 * but we want branding visible immediately on the login page.
-	 */
-	public function serviceClientConfig(): bool
-	{
-		\header('Content-Type: application/json; charset=utf-8');
-		\header('Cache-Control: public, max-age=300');
-
-		$client = $this->detectClient();
-		echo \json_encode($client ?: ['_id' => 'default']);
-		return true;
-	}
-
-	/**
-	 * Allow external logo images in CSP.
-	 */
 	public function adjustCSP(\SnappyMail\HTTP\CSP $oCSP): void
 	{
 		$client = $this->detectClient();
 		if ($client) {
-			$logoUrl = $client['logo_url'] ?? '';
-			$faviconUrl = $client['favicon_url'] ?? '';
-			foreach ([$logoUrl, $faviconUrl] as $url) {
+			foreach (['logo_url', 'favicon_url'] as $key) {
+				$url = $client[$key] ?? '';
 				if ($url && \preg_match('#^https?://([^/]+)#', $url, $m)) {
 					$oCSP->add('img-src', 'https://' . $m[1]);
 				}
@@ -175,12 +148,6 @@ class WhiteLabelPlugin extends \RainLoop\Plugins\AbstractPlugin
 
 	protected function configMapping(): array
 	{
-		return [
-			\RainLoop\Plugins\Property::NewInstance('enabled')
-				->SetLabel('Enable White-Label Branding')
-				->SetType(\RainLoop\Enumerations\PluginPropertyType::BOOL)
-				->SetDefaultValue(true)
-				->SetAllowedInJs(true),
-		];
+		return [];
 	}
 }

@@ -1,223 +1,117 @@
 /**
- * White-Label Branding - Client-side JavaScript
- *
- * Applies dynamic branding (logo, colors, company name) based on
- * the configuration injected by the PHP plugin via filter.app-data
- * or fetched from the /?white-label-config endpoint.
+ * White-Label Branding - Client-side
+ * Reads branding from rl.settings (injected by PHP filter.app-data hook)
  */
 (rl => {
 	'use strict';
-
 	if (!rl) return;
 
-	/**
-	 * Apply CSS custom properties for client branding colors.
-	 */
-	function applyBrandingColors(config) {
-		if (!config) return;
-
-		const root = document.documentElement;
-		const primaryColor = config.primaryColor || config.primary_color;
-		const accentColor = config.accentColor || config.accent_color;
-
-		if (primaryColor) {
-			root.style.setProperty('--wl-primary-color', primaryColor);
-			// Override key theme variables with brand color
-			root.style.setProperty('--link-color', primaryColor);
-			root.style.setProperty('--folders-selected-color', primaryColor);
-			root.style.setProperty('--folders-focused-color', primaryColor);
-			root.style.setProperty('--settings-menu-selected-color', primaryColor);
-			root.style.setProperty('--unread-count-color', primaryColor);
-			root.style.setProperty('--input-focus-border-clr', primaryColor);
-			root.style.setProperty('--tab-hover-border-clr', primaryColor);
-			root.style.setProperty('--spinner-color', primaryColor);
-			root.style.setProperty('--loading-color', primaryColor);
-		}
-
-		if (accentColor) {
-			root.style.setProperty('--wl-accent-color', accentColor);
+	function getConfig() {
+		try {
+			return rl.settings && rl.settings.get('WhiteLabel');
+		} catch(e) {
+			return null;
 		}
 	}
 
-	/**
-	 * Apply logo and company name to the login page.
-	 */
+	function applyColors(config) {
+		if (!config || !config.primaryColor) return;
+		const root = document.documentElement;
+		root.style.setProperty('--wl-primary-color', config.primaryColor);
+		root.style.setProperty('--wl-accent-color', config.accentColor || config.primaryColor);
+	}
+
 	function applyLoginBranding(config) {
 		if (!config) return;
 
-		const logoUrl = config.logoUrl || config.logo_url;
-		const companyName = config.companyName || config.company_name;
-		const loginBg = config.loginBg || config.login_background;
-		const loginBgColor = config.loginBgColor || config.login_bg_color;
-
-		// Set login page background
-		if (loginBgColor) {
+		// Set login background
+		if (config.loginBgColor) {
+			document.body.style.background = config.loginBgColor;
 			const rlContent = document.getElementById('rl-content');
-			if (rlContent) {
-				rlContent.style.background = loginBgColor;
-			}
-			document.body.style.background = loginBgColor;
-		}
-		if (loginBg) {
-			const rlContent = document.getElementById('rl-content');
-			if (rlContent) {
-				rlContent.style.background = loginBg;
-			}
+			if (rlContent) rlContent.style.background = config.loginBgColor;
 		}
 
-		// Replace or add logo above the login form
-		const loginForm = document.querySelector('#V-Login form') ||
-		                   document.querySelector('#V-Login');
-		if (!loginForm) return;
+		// Find the login form container
+		const loginView = document.querySelector('#V-Login') || document.querySelector('#V-AdminLogin');
+		if (!loginView) return;
 
-		// Find or create the branding container
-		let brandingEl = document.getElementById('wl-branding');
-		if (!brandingEl) {
-			brandingEl = document.createElement('div');
-			brandingEl.id = 'wl-branding';
-			brandingEl.style.cssText = 'text-align:center;margin-bottom:24px;';
-			const loginBox = loginForm.closest('.LoginView') || loginForm.parentElement;
-			if (loginBox) {
-				loginBox.insertBefore(brandingEl, loginBox.firstChild);
+		// Insert branding above the form
+		let brandEl = document.getElementById('wl-branding');
+		if (!brandEl) {
+			brandEl = document.createElement('div');
+			brandEl.id = 'wl-branding';
+			brandEl.className = 'wl-branding-header';
+			const form = loginView.querySelector('form');
+			if (form) {
+				form.insertBefore(brandEl, form.firstChild);
 			}
 		}
 
 		let html = '';
-		if (logoUrl) {
-			const logoWidth = config.logoWidth || config.logo_width || '200px';
-			html += `<img src="${escapeHtml(logoUrl)}" alt="${escapeHtml(companyName || 'Logo')}" `
-			      + `style="max-width:${escapeHtml(logoWidth)};height:auto;margin-bottom:12px;" `
-			      + `class="wl-logo">`;
+		if (config.logoUrl) {
+			html += '<img src="' + config.logoUrl + '" alt="' + (config.companyName || '') + '" class="wl-logo" style="max-width:' + (config.logoWidth || '180px') + ';height:auto;">';
 		}
-		if (companyName) {
-			html += `<h2 class="wl-company-name" style="margin:0 0 8px;font-weight:600;font-size:20px;color:inherit;">`
-			      + `${escapeHtml(companyName)}</h2>`;
+		if (config.companyName) {
+			html += '<div class="wl-company-name">' + config.companyName + '</div>';
 		}
 		if (html) {
-			brandingEl.innerHTML = html;
+			brandEl.innerHTML = html;
 		}
-
-		// Update page title
-		if (companyName) {
-			document.title = companyName + ' - Mail';
-		}
-
-		// Update favicon if provided
-		const faviconUrl = config.faviconUrl || config.favicon_url;
-		if (faviconUrl) {
-			let link = document.querySelector("link[rel*='icon']");
-			if (link) {
-				link.href = faviconUrl;
-			}
-		}
-	}
-
-	/**
-	 * Apply branding after login (in the main app view).
-	 */
-	function applyAppBranding(config) {
-		if (!config) return;
-
-		const companyName = config.companyName || config.company_name;
-		const logoUrl = config.logoUrl || config.logo_url;
 
 		// Update title
-		if (companyName) {
-			document.title = companyName + ' - Mail';
+		if (config.companyName) {
+			document.title = config.companyName;
 		}
 
 		// Update favicon
-		const faviconUrl = config.faviconUrl || config.favicon_url;
-		if (faviconUrl) {
-			let link = document.querySelector("link[rel*='icon']");
-			if (link) {
-				link.href = faviconUrl;
-			}
-		}
-
-		// Optionally replace the SnappyMail logo in settings
-		if (logoUrl) {
-			const settingsLogo = document.querySelector('#V-Settings-About .rl-logo');
-			if (settingsLogo) {
-				settingsLogo.src = logoUrl;
-				settingsLogo.style.filter = 'none';
-			}
+		if (config.faviconUrl) {
+			const link = document.querySelector("link[rel*='icon']");
+			if (link) link.href = config.faviconUrl;
 		}
 	}
 
-	/**
-	 * HTML escape utility.
-	 */
-	function escapeHtml(str) {
-		if (!str) return '';
-		const div = document.createElement('div');
-		div.textContent = str;
-		return div.innerHTML;
+	function applyAppBranding(config) {
+		if (!config) return;
+		if (config.companyName) {
+			document.title = config.companyName;
+		}
+		if (config.faviconUrl) {
+			const link = document.querySelector("link[rel*='icon']");
+			if (link) link.href = config.faviconUrl;
+		}
 	}
 
-	/**
-	 * Fetch branding config immediately on page load (before app-data arrives).
-	 * This ensures the login page shows branding without delay.
-	 */
-	function fetchAndApplyBranding() {
-		fetch('/?white-label-config', { credentials: 'same-origin' })
-			.then(r => r.json())
-			.then(config => {
-				if (config && config._id) {
-					window.__wlConfig = config;
-					applyBrandingColors(config);
-				}
-			})
-			.catch(() => {});
-	}
-
-	// Fetch config immediately
-	fetchAndApplyBranding();
-
-	// Apply branding when the Login view is rendered
+	// When Login view renders
 	addEventListener('rl-view-model', e => {
 		const id = e.detail && e.detail.viewModelTemplateID;
 		if ('Login' === id || 'AdminLogin' === id) {
-			// Try from app-data first (available if filter.app-data ran)
-			const appData = rl.settings && rl.settings.get && rl.settings.get('WhiteLabel');
-			const config = appData || window.__wlConfig;
+			const config = getConfig();
 			if (config) {
-				applyBrandingColors(config);
+				applyColors(config);
 				applyLoginBranding(config);
-			} else {
-				// Retry after a short delay in case fetch hasn't completed
-				setTimeout(() => {
-					const c = window.__wlConfig;
-					if (c) {
-						applyBrandingColors(c);
-						applyLoginBranding(c);
-					}
-				}, 300);
 			}
 		}
 	});
 
-	// Apply branding when the main mailbox screen loads
-	addEventListener('sm-show-screen', e => {
-		const config = (rl.settings && rl.settings.get && rl.settings.get('WhiteLabel'))
-		            || window.__wlConfig;
+	// When main screen shows
+	addEventListener('sm-show-screen', () => {
+		const config = getConfig();
 		if (config) {
-			applyBrandingColors(config);
+			applyColors(config);
 			applyAppBranding(config);
 		}
 	});
 
-	// Also respond to successful login
+	// After successful login
 	addEventListener('sm-user-login-response', e => {
 		if (e.detail && !e.detail.error) {
 			setTimeout(() => {
-				const config = (rl.settings && rl.settings.get && rl.settings.get('WhiteLabel'))
-				            || window.__wlConfig;
+				const config = getConfig();
 				if (config) {
-					applyBrandingColors(config);
+					applyColors(config);
 					applyAppBranding(config);
 				}
-			}, 500);
+			}, 300);
 		}
 	});
 
