@@ -1,35 +1,43 @@
-name: Build & Deploy to Hostinger
+name: Deploy SnappyMail to Hostinger
 
 on:
   push:
     branches: [master]
   workflow_dispatch:
 
+env:
+  SNAPPYMAIL_VERSION: "2.38.2"
+
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout code
+      - name: Checkout my customizations
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          path: custom
 
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Build static assets
-        run: npx gulp
-
-      - name: Create include.php with data path
+      - name: Download official release
         run: |
-          cat > include.php << 'EOF'
+          wget -q "https://github.com/the-djmaze/snappymail/releases/download/v${SNAPPYMAIL_VERSION}/snappymail-${SNAPPYMAIL_VERSION}.tar.gz"
+          mkdir release
+          tar -xzf snappymail-*.tar.gz -C release
+
+      - name: Apply my customizations
+        run: |
+          # Copy any custom files over the release
+          # e.g. themes, plugins, branding
+          cp -r custom/my-overrides/* release/ 2>/dev/null || true
+
+      - name: Set data path
+        run: |
+          cat > release/include.php << 'EOF'
           <?php
           define('APP_DATA_FOLDER_PATH', '/home/u930449354/snappymail-data/');
           EOF
+
+      - name: Remove data folder from deploy
+        run: rm -rf release/data
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -38,15 +46,4 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
           server-dir: /public_html/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.github/**
-            **/data/**
-            **/.docker/**
-            **/test/**
-            **/tests/**
-            **/docker-compose.yml
-            **/*.md
-            **/Dockerfile
+          local-dir: ./release/
