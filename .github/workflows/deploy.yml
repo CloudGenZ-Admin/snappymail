@@ -1,0 +1,67 @@
+name: Build & Deploy to Hostinger
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:  # allows manual trigger
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+            - name: Checkout code
+        uses: actions/checkout@v4
+
+            - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+            - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+
+            - name: Install dependencies
+        run: |
+          composer install --no-dev --optimize-autoloader
+          yarn install --frozen-lockfile
+
+            - name: Build frontend
+        run: yarn build
+
+            - name: Create include.php with data path
+        run: |
+          cat > include.php << 'EOF'
+          <?php
+          // Point data to persistent directory outside web root
+          define('APP_DATA_FOLDER_PATH', '/home/u930449354/snappymail-data/');
+          EOF
+
+            - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          server-dir: /public_html/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.github/**
+            **/data/**
+            **/.yarn/**
+            **/test/**
+            **/tests/**
+            **/.editorconfig
+            **/.eslintrc*
+            **/tsconfig.json
+            **/webpack.config.js
+            **/package.json
+            **/yarn.lock
+            **/composer.lock
+            **/Dockerfile
+            **/*.md
