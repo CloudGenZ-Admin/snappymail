@@ -127,23 +127,22 @@
    LOGIN PAGE - CLEAN ELEVATED CARD (DARK)
    ========================================================== */
 
-.LoginView {
-	background: #141414 !important;
+/* Full page background for login */
+#rl-app {
+	background-color: #141414 !important;
 }
 
-.LoginView .descWrapper {
-	color: #e4e4e4 !important;
-	font-size: 160% !important;
-	font-weight: 300 !important;
-	text-shadow: none !important;
+/* The login card container */
+#V-Login, #V-AdminLogin {
+	max-width: 440px !important;
 }
 
 .LoginView form {
 	background: #2d2d2d !important;
 	border: 1px solid #404040 !important;
 	border-radius: 8px !important;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4) !important;
-	padding: 40px 36px 32px !important;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+	padding: 44px 40px 36px !important;
 	color: #e4e4e4 !important;
 }
 
@@ -156,45 +155,58 @@
 	border-color: #c42b31 !important;
 }
 
+.LoginView .controls {
+	margin-bottom: 20px !important;
+}
+
 .LoginView input {
 	background: #1a1a1a !important;
 	border: 1px solid #4d4d4d !important;
+	border-bottom: 2px solid #4d4d4d !important;
 	border-radius: 4px !important;
 	color: #e4e4e4 !important;
-	font-size: 14px !important;
-	height: 36px !important;
-	padding: 0 12px 0 36px !important;
+	font-size: 15px !important;
+	height: 40px !important;
+	padding: 0 12px 0 38px !important;
 	transition: border-color 0.15s ease !important;
+	width: 100% !important;
+	box-sizing: border-box !important;
 }
 
 .LoginView input::placeholder {
 	color: #6b6b6b !important;
 }
 
-.LoginView input:focus,
+.LoginView input:focus {
+	border-bottom-color: #62abf5 !important;
+	outline: none !important;
+}
+
 .LoginView input:hover {
-	border-color: #62abf5 !important;
+	border-color: #5a5a5a !important;
 }
 
 .LoginView .controls > .fontastic:first-child {
-	font-size: 15px !important;
+	font-size: 16px !important;
 	color: #8a8a8a !important;
 	left: 10px !important;
-	line-height: 36px !important;
+	line-height: 40px !important;
 }
 
-.LoginView .buttonLogin,
-.LoginView form > div > .btn {
+.LoginView .buttonLogin {
 	background: #2b6cb0 !important;
 	border: none !important;
 	border-radius: 4px !important;
 	color: #ffffff !important;
-	font-size: 14px !important;
+	font-size: 15px !important;
 	font-weight: 600 !important;
-	height: 36px !important;
+	height: 40px !important;
 	text-transform: none !important;
 	box-shadow: none !important;
 	text-shadow: none !important;
+	cursor: pointer !important;
+	width: 100% !important;
+	margin-top: 8px !important;
 }
 
 .LoginView .buttonLogin:hover {
