@@ -121,14 +121,15 @@ class WhiteLabelPlugin extends \RainLoop\Plugins\AbstractPlugin
 
 		if ($client) {
 			$aAppData['WhiteLabel'] = [
-				'clientId'     => $client['_id'] ?? 'default',
-				'companyName'  => $client['company_name'] ?? '',
-				'logoUrl'      => $client['logo_url'] ?? '',
-				'logoWidth'    => $client['logo_width'] ?? '180px',
-				'faviconUrl'   => $client['favicon_url'] ?? '',
-				'primaryColor' => $client['primary_color'] ?? '#0f6cbd',
-				'accentColor'  => $client['accent_color'] ?? '#115ea3',
-				'loginBgColor' => $client['login_bg_color'] ?? '',
+				'clientId'       => $client['_id'] ?? 'default',
+				'companyName'    => $client['company_name'] ?? '',
+				'title'          => $client['title'] ?? ($client['company_name'] ?? ''),
+				'logoUrl'        => $client['logo_url'] ?? '',
+				'logoWidth'      => $client['logo_width'] ?? '180px',
+				'faviconUrl'     => $client['favicon_url'] ?? '',
+				'loadingMessage' => $client['loading_message'] ?? '',
+				'primaryColor'   => $client['primary_color'] ?? '#18d26e',
+				'accentColor'    => $client['accent_color'] ?? '#13a456',
 			];
 		}
 	}

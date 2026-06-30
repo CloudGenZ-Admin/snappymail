@@ -6,6 +6,11 @@
 :root {
 	color-scheme: light;
 
+	/* WHITE-LABEL BRAND COLORS (overridden by plugin) */
+	--wl-primary-color: #18d26e;
+	--wl-accent-color: #13a456;
+
+
 	/* CORE PALETTE */
 	--main-color: #242424;
 	--main-bg-color: #f5f5f5;
@@ -179,7 +184,7 @@ html, body, #rl-app {
 }
 
 .LoginView input:focus {
-	border-bottom-color: #18d26e !important;
+	border-bottom-color: var(--wl-primary-color, #18d26e) !important;
 	outline: none !important;
 }
 
@@ -195,7 +200,7 @@ html, body, #rl-app {
 }
 
 .LoginView .buttonLogin {
-	background: #18d26e !important;
+	background: var(--wl-primary-color, #18d26e) !important;
 	border: none !important;
 	border-radius: 4px !important;
 	color: #ffffff !important;
@@ -211,7 +216,7 @@ html, body, #rl-app {
 }
 
 .LoginView .buttonLogin:hover {
-	background: #13a456 !important;
+	background: var(--wl-accent-color, #13a456) !important;
 }
 
 .LoginView .e-checkbox {
@@ -238,7 +243,7 @@ html, body, #rl-app {
 .LoginView form.submitting::after {
 	border-width: 3px !important;
 	border-color: transparent !important;
-	border-top-color: #18d26e !important;
+	border-top-color: var(--wl-primary-color, #18d26e) !important;
 }
 
 
@@ -282,7 +287,7 @@ html, body, #rl-app {
 	width: auto !important;
 	padding: 6px 14px !important;
 	border-radius: 4px !important;
-	background: #18d26e !important;
+	background: var(--wl-primary-color, #18d26e) !important;
 	border: none !important;
 	color: #ffffff !important;
 	font-weight: 600 !important;
@@ -292,7 +297,7 @@ html, body, #rl-app {
 }
 
 #rl-left .buttonCompose:hover {
-	background: #13a456 !important;
+	background: var(--wl-accent-color, #13a456) !important;
 }
 
 .b-folders li a {
@@ -309,14 +314,14 @@ html, body, #rl-app {
 
 .b-folders li a.selectable.selected {
 	background-color: #ebf3fc !important;
-	color: #18d26e !important;
+	color: var(--wl-primary-color, #18d26e) !important;
 	font-weight: 600 !important;
 }
 
 /* Unread badge */
 .b-folders .b-folders-system a[data-unread]::after,
 .b-folders .b-folders-user a[data-unread]:not(.system)::after {
-	background-color: #18d26e !important;
+	background-color: var(--wl-primary-color, #18d26e) !important;
 	color: #ffffff !important;
 	font-size: 11px !important;
 	font-weight: 600 !important;
@@ -360,12 +365,12 @@ html, body, #rl-app {
 .messageListItem.selected,
 .messageListItem.checked {
 	background-color: #ebf3fc !important;
-	border-left-color: #18d26e !important;
+	border-left-color: var(--wl-primary-color, #18d26e) !important;
 }
 
 .messageListItem.unseen {
 	font-weight: 600 !important;
-	border-left-color: #18d26e !important;
+	border-left-color: var(--wl-primary-color, #18d26e) !important;
 }
 
 .messageList .b-footer {
@@ -410,12 +415,12 @@ html, body, #rl-app {
 }
 
 .btn.btn-success {
-	background: #18d26e !important;
-	border-color: #18d26e !important;
+	background: var(--wl-primary-color, #18d26e) !important;
+	border-color: var(--wl-primary-color, #18d26e) !important;
 	color: #ffffff !important;
 }
 .btn.btn-success:hover {
-	background: #13a456 !important;
+	background: var(--wl-accent-color, #13a456) !important;
 }
 
 
@@ -517,7 +522,7 @@ input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="search"]:focus,
 textarea:focus {
-	border-color: #18d26e !important;
+	border-color: var(--wl-primary-color, #18d26e) !important;
 }
 
 select, .select {
@@ -546,8 +551,8 @@ select, .select {
 
 .tabs > [id^="tab"]:checked + label {
 	background: transparent !important;
-	border-bottom: 2px solid #18d26e !important;
-	color: #18d26e !important;
+	border-bottom: 2px solid var(--wl-primary-color, #18d26e) !important;
+	color: var(--wl-primary-color, #18d26e) !important;
 	opacity: 1 !important;
 }
 
@@ -613,7 +618,7 @@ input[type="search"]::-webkit-search-decoration {
 
 .icon-spinner {
 	border-color: #e0e0e0 !important;
-	border-top-color: #18d26e !important;
+	border-top-color: var(--wl-primary-color, #18d26e) !important;
 }
 
 
@@ -630,7 +635,7 @@ input[type="search"]::-webkit-search-decoration {
 
 /* Compose header bar */
 #V-PopupsCompose > header {
-	background: #18d26e !important;
+	background: var(--wl-primary-color, #18d26e) !important;
 	color: #ffffff !important;
 	padding: 10px 16px !important;
 	border-bottom: none !important;
@@ -684,7 +689,7 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 #V-PopupsCompose .b-header input[type="text"]:focus {
-	border-color: #18d26e !important;
+	border-color: var(--wl-primary-color, #18d26e) !important;
 }
 
 /* Compose tabs (message/attachments) */
@@ -708,8 +713,8 @@ input[type="search"]::-webkit-search-decoration {
 
 /* Send button in compose */
 #V-PopupsCompose .btn.btn-success {
-	background: #18d26e !important;
-	border-color: #18d26e !important;
+	background: var(--wl-primary-color, #18d26e) !important;
+	border-color: var(--wl-primary-color, #18d26e) !important;
 	color: #ffffff !important;
 	padding: 8px 20px !important;
 	font-weight: 600 !important;
@@ -717,7 +722,7 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 #V-PopupsCompose .btn.btn-success:hover {
-	background: #13a456 !important;
+	background: var(--wl-accent-color, #13a456) !important;
 }
 
 /* Attachment area */

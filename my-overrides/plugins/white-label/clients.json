@@ -1,14 +1,13 @@
 {
 	"default": {
-		"company_name": "CloudGenz Mail",
+		"company_name": "CloudGenZ",
+		"title": "CloudGenZ Mail",
 		"logo_url": "https://cloudgenz.com/assets/img/favicon.png",
 		"logo_width": "48px",
 		"favicon_url": "https://cloudgenz.com/assets/img/favicon.png",
+		"loading_message": "Loading CloudGenZ Mail...",
 		"primary_color": "#18d26e",
 		"accent_color": "#13a456",
-		"login_bg_color": "#f5f5f5",
-		"login_background": "",
-		"dark_mode": false,
 		"domains": ["mail.cloudgenz.com"],
 		"email_domains": ["cloudgenz.com"]
 	}
