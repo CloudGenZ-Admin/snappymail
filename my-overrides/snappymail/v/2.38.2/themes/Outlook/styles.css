@@ -1,202 +1,584 @@
 /*
- * Outlook Light Theme for SnappyMail
- * Mimics Microsoft Outlook Web's clean, professional appearance
+ * Outlook Modern Light Theme for SnappyMail
+ * Complete UI revamp: Fluent UI 2 design system
+ * Modern depth, refined typography, polished interactions
  */
+
+/* ===== DESIGN TOKENS ===== */
 :root {
 	color-scheme: light;
 
-	/* MAIN */
-	--main-color: #323130;
-	--main-bg-color: #f3f2f1;
+	/* CORE PALETTE */
+	--main-color: #242424;
+	--main-bg-color: #f5f5f5;
 	--main-bg-image: none;
 	--main-bg-size: auto;
 	--main-bg-repeat: no-repeat;
 	--main-font-size: 14px;
-	--link-color: #0078d4;
-	--border-color: #edebe9;
-	--border-radius: 4px;
-	--hr-color: #edebe9;
+	--link-color: #0f6cbd;
+	--border-color: #e0e0e0;
+	--border-radius: 8px;
+	--hr-color: #e8e8e8;
 
 	--panel-bg-clr: #ffffff;
 
-	--warning-clr: #797673;
-	--warning-bg-clr: #fff4ce;
+	/* STATUS COLORS */
+	--warning-clr: #8a6914;
+	--warning-bg-clr: #fef7e0;
 	--warning-border-clr: #fce100;
 
-	--error-clr: #a80000;
-	--error-bg-clr: #fde7e9;
-	--error-border-clr: #a80000;
+	--error-clr: #b10e1c;
+	--error-bg-clr: #fdf3f4;
+	--error-border-clr: #eeacb2;
 
-	--info-clr: #0078d4;
-	--info-bg-clr: #eff6fc;
-	--info-border-clr: #0078d4;
+	--info-clr: #0f6cbd;
+	--info-bg-clr: #ebf3fc;
+	--info-border-clr: #b4d6fa;
 
 	/* LOADING */
-	--loading-color: #0078d4;
+	--loading-color: #0f6cbd;
 	--loading-text-shadow: none;
 
 	/* LOGIN */
-	--login-color: #323130;
+	--login-color: #242424;
 	--login-bg-color: #ffffff;
-	--login-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-	--login-border: 1px solid #edebe9;
-	--login-border-radius: 4px;
+	--login-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+	--login-border: 1px solid rgba(0, 0, 0, 0.06);
+	--login-border-radius: 12px;
 
-	--spinner-color: #0078d4;
+	--spinner-color: #0f6cbd;
 
 	/* MENU */
-	--dropdown-menu-color: #323130;
+	--dropdown-menu-color: #242424;
 	--dropdown-menu-bg-color: #ffffff;
-	--dropdown-menu-hover-bg-color: #f3f2f1;
-	--dropdown-menu-hover-color: #323130;
-	--dropdown-menu-disabled-color: #a19f9d;
-	--dropdown-menu-border-clr: #edebe9;
+	--dropdown-menu-hover-bg-color: #f5f5f5;
+	--dropdown-menu-hover-color: #242424;
+	--dropdown-menu-disabled-color: #bdbdbd;
+	--dropdown-menu-border-clr: #e0e0e0;
 
 	/* FOLDERS */
-	--folders-color: #323130;
-	--folders-disabled-color: #a19f9d;
-	--folders-selected-color: #0078d4;
-	--folders-selected-bg-color: #edebe9;
-	--folders-focused-color: #0078d4;
-	--folders-focused-bg-color: #e1dfdd;
-	--folders-hover-color: #323130;
-	--folders-hover-bg-color: #f3f2f1;
-	--folders-drop-color: #0078d4;
-	--folders-drop-bg-color: #deecf9;
-	--unread-count-color: #0078d4;
-	--unread-count-bg-color: transparent;
+	--folders-color: #424242;
+	--folders-disabled-color: #bdbdbd;
+	--folders-selected-color: #0f6cbd;
+	--folders-selected-bg-color: #ebf3fc;
+	--folders-focused-color: #0f6cbd;
+	--folders-focused-bg-color: #e1f0ff;
+	--folders-hover-color: #242424;
+	--folders-hover-bg-color: #f5f5f5;
+	--folders-drop-color: #0f6cbd;
+	--folders-drop-bg-color: #ebf3fc;
+	--unread-count-color: #ffffff;
+	--unread-count-bg-color: #0f6cbd;
 
 	/* SETTINGS */
-	--settings-menu-color: #323130;
-	--settings-menu-selected-color: #0078d4;
-	--settings-menu-selected-bg-color: #edebe9;
-	--settings-menu-hover-color: #323130;
-	--settings-menu-hover-bg-color: #f3f2f1;
+	--settings-menu-color: #424242;
+	--settings-menu-selected-color: #0f6cbd;
+	--settings-menu-selected-bg-color: #ebf3fc;
+	--settings-menu-hover-color: #242424;
+	--settings-menu-hover-bg-color: #f5f5f5;
 
 	/* MESSAGES */
 	--message-list-toolbar-bg-color: #ffffff;
-	--message-header-bg-clr: #f9f8f7;
+	--message-header-bg-clr: #fafafa;
 
 	/* DIALOGS */
-	--dialog-clr: #323130;
+	--dialog-clr: #242424;
 	--dialog-bg-clr: #ffffff;
-	--dialog-border-clr: #edebe9;
-	--dialog-border-radius: 4px;
+	--dialog-border-clr: rgba(0, 0, 0, 0.08);
+	--dialog-border-radius: 12px;
 
 	/* FORMS */
 	--btn-clr: #ffffff;
-	--btn-bg-clr: #0078d4;
-	--btn-border-clr: #0078d4;
-	--btn-border-radius: 4px;
-	--btn-success-bg-clr: #107c10;
-	--btn-danger-bg-clr: #a80000;
+	--btn-bg-clr: #0f6cbd;
+	--btn-border-clr: #0f6cbd;
+	--btn-border-radius: 6px;
+	--btn-success-bg-clr: #0f7b0f;
+	--btn-danger-bg-clr: #b10e1c;
 
-	--input-clr: #323130;
+	--input-clr: #242424;
 	--input-bg-clr: #ffffff;
-	--input-border-clr: #8a8886;
-	--input-border-radius: 4px;
-	--input-focus-border-clr: #0078d4;
+	--input-border-clr: #d1d1d1;
+	--input-border-radius: 6px;
+	--input-focus-border-clr: #0f6cbd;
 
 	/* TABLES */
-	--tr-hover-bg-clr: #f3f2f1;
-	--tr-odd-bg-clr: #faf9f8;
+	--tr-hover-bg-clr: #f5f5f5;
+	--tr-odd-bg-clr: #fafafa;
 
 	/* TABS */
 	--tab-active-bg-clr: #ffffff;
-	--tab-hover-border-clr: #0078d4;
+	--tab-hover-border-clr: #0f6cbd;
 
 	--smDialogShrink: 20px;
-	--smMainShadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+	--smMainShadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-/* ===== OUTLOOK-SPECIFIC OVERRIDES ===== */
 
-/* Top toolbar - Outlook command bar style */
-.thm-message-list-top-toolbar,
-.thm-message-list-bottom-toolbar {
-	background-color: #ffffff !important;
-	background-image: none !important;
-	border-bottom: 1px solid #edebe9 !important;
+/* ==========================================================
+   GLOBAL RESET & TYPOGRAPHY
+   ========================================================== */
+
+#rl-app {
+	font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	letter-spacing: -0.01em;
 }
 
-/* Folder list styling */
-#V-MailFolderList {
-	background-color: #faf9f8;
-	border-right: 1px solid #edebe9;
+#rl-content:not([hidden]) {
+	background: #f5f5f5;
+}
+
+
+/* ==========================================================
+   LOGIN PAGE - PREMIUM DESIGN
+   ========================================================== */
+
+#V-Login, #V-AdminLogin {
+	max-width: 420px;
+}
+
+.LoginView {
+	background: linear-gradient(145deg, #0f6cbd 0%, #0e4f8b 50%, #0a3d6e 100%) !important;
+}
+
+.LoginView::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background:
+		radial-gradient(ellipse at 20% 50%, rgba(15, 108, 189, 0.3) 0%, transparent 50%),
+		radial-gradient(ellipse at 80% 20%, rgba(99, 179, 237, 0.15) 0%, transparent 40%);
+	pointer-events: none;
+	z-index: 0;
+}
+
+.LoginView .descWrapper {
+	color: #ffffff !important;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+	font-size: 180% !important;
+	font-weight: 300 !important;
+}
+
+.LoginView form {
+	background: rgba(255, 255, 255, 0.97) !important;
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	border: 1px solid rgba(255, 255, 255, 0.8) !important;
+	border-radius: 16px !important;
+	box-shadow:
+		0 20px 60px rgba(0, 0, 0, 0.15),
+		0 8px 24px rgba(0, 0, 0, 0.1),
+		inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+	padding: 44px 40px 36px !important;
+	color: #242424 !important;
+	transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.LoginView form * {
+	color: #242424 !important;
+}
+
+.LoginView form .controls.error * {
+	color: #b10e1c !important;
+	border-color: #b10e1c !important;
+}
+
+/* Login inputs */
+.LoginView input {
+	background: #f5f5f5 !important;
+	border: 2px solid #e0e0e0 !important;
+	border-radius: 8px !important;
+	color: #242424 !important;
+	font-size: 15px !important;
+	height: 46px !important;
+	padding: 0 16px 0 44px !important;
+	transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.LoginView input::placeholder {
+	color: #9e9e9e !important;
+}
+
+.LoginView input:focus,
+.LoginView input:hover {
+	background: #ffffff !important;
+	border-color: #0f6cbd !important;
+	box-shadow: 0 0 0 2px rgba(15, 108, 189, 0.12) !important;
+}
+
+/* Login form icons */
+.LoginView .controls > .fontastic:first-child {
+	font-size: 18px !important;
+	color: #757575 !important;
+	left: 14px !important;
+	line-height: 46px !important;
+}
+
+/* Login button */
+.LoginView .buttonLogin,
+.LoginView .btn {
+	background: linear-gradient(180deg, #1a7fd4 0%, #0f6cbd 100%) !important;
+	border: none !important;
+	border-radius: 8px !important;
+	color: #ffffff !important;
+	font-size: 15px !important;
+	font-weight: 600 !important;
+	height: 46px !important;
+	letter-spacing: 0.02em !important;
+	text-transform: none !important;
+	transition: all 0.15s ease !important;
+	box-shadow: 0 2px 8px rgba(15, 108, 189, 0.25) !important;
+}
+
+.LoginView .buttonLogin:hover,
+.LoginView .btn:hover {
+	background: linear-gradient(180deg, #2389de 0%, #1a7fd4 100%) !important;
+	box-shadow: 0 4px 16px rgba(15, 108, 189, 0.35) !important;
+	transform: translateY(-1px);
+}
+
+.LoginView .buttonLogin:active,
+.LoginView .btn:active {
+	transform: translateY(0) !important;
+	box-shadow: 0 1px 4px rgba(15, 108, 189, 0.2) !important;
+}
+
+/* Remember me checkbox area */
+.LoginView .e-checkbox {
+	font-size: 13px !important;
+	color: #616161 !important;
+}
+
+/* Language button */
+.LoginView .language-button {
+	opacity: 0.6 !important;
+	transition: opacity 0.15s !important;
+}
+.LoginView .language-button:hover {
+	opacity: 1 !important;
+}
+
+/* Login error alert */
+.LoginView .alert {
+	background: #fdf3f4 !important;
+	border: 1px solid #eeacb2 !important;
+	border-radius: 8px !important;
+	padding: 12px 16px !important;
+	color: #b10e1c !important;
+}
+.LoginView .alert * {
+	color: #b10e1c !important;
+}
+
+/* Submitting spinner */
+.LoginView form.submitting::after {
+	border-width: 3px !important;
+	border-color: transparent !important;
+	border-top-color: #0f6cbd !important;
+}
+
+
+/* ==========================================================
+   SIDEBAR / FOLDER PANEL
+   ========================================================== */
+
+#rl-left {
+	background: #fafafa !important;
+	border-right: 1px solid #e8e8e8 !important;
+}
+
+/* Compose button */
+#rl-left .b-toolbar {
+	padding: 16px 12px !important;
+}
+
+#rl-left .buttonCompose,
+.b-folders .b-toolbar .btn {
+	background: linear-gradient(180deg, #1a7fd4 0%, #0f6cbd 100%) !important;
+	border: none !important;
+	border-radius: 8px !important;
+	color: #ffffff !important;
+	font-weight: 600 !important;
+	padding: 10px 16px !important;
+	box-shadow: 0 2px 6px rgba(15, 108, 189, 0.2) !important;
+	transition: all 0.15s ease !important;
+}
+
+#rl-left .buttonCompose:hover {
+	box-shadow: 0 4px 12px rgba(15, 108, 189, 0.3) !important;
+	transform: translateY(-1px);
+}
+
+/* Folder tree */
+.b-folders .b-content {
+	color: #424242 !important;
+}
+
+.b-folders li a {
+	border-radius: 6px !important;
+	margin: 1px 8px !important;
+	padding: 8px 12px !important;
+	border-left: none !important;
+	transition: all 0.1s ease !important;
+	line-height: 1.8em !important;
+}
+
+.b-folders li a.selectable:hover {
+	background-color: #f0f0f0 !important;
+}
+
+.b-folders li a.selectable.selected {
+	background-color: #ebf3fc !important;
+	color: #0f6cbd !important;
+	font-weight: 600 !important;
+}
+
+/* Unread badge */
+.b-folders .b-folders-system a[data-unread]::after,
+.b-folders .b-folders-user a[data-unread]:not(.system)::after {
+	background-color: #0f6cbd !important;
+	color: #ffffff !important;
+	font-size: 11px !important;
+	font-weight: 600 !important;
+	min-width: 20px !important;
+	height: 20px !important;
+	line-height: 20px !important;
+	border-radius: 10px !important;
+	padding: 0 6px !important;
+	text-shadow: none !important;
+	right: 8px !important;
+}
+
+/* Folder footer */
+.b-folders .b-footer {
+	border-top: 1px solid #e8e8e8 !important;
+	padding: 12px !important;
+}
+
+/* Search in folders */
+#rl-left .search-input-wrp input {
+	border-radius: 8px !important;
+	border: 1px solid #e0e0e0 !important;
+	padding: 8px 12px !important;
+	background: #ffffff !important;
+	transition: border-color 0.15s !important;
+}
+#rl-left .search-input-wrp input:focus {
+	border-color: #0f6cbd !important;
+	box-shadow: 0 0 0 2px rgba(15, 108, 189, 0.1) !important;
+}
+
+
+/* ==========================================================
+   MESSAGE LIST & TOOLBAR
+   ========================================================== */
+
+/* Top toolbar */
+.messageList .second-toolbar {
+	background: #ffffff !important;
+	border-bottom: 1px solid #e8e8e8 !important;
+	border-radius: 12px 12px 0 0 !important;
+	padding: 8px 12px !important;
+	gap: 4px;
+}
+
+/* Message list container */
+.messageList {
+	border: none !important;
+	border-radius: 12px !important;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 0 1px rgba(0, 0, 0, 0.1) !important;
+	overflow: hidden;
 }
 
 /* Message list items */
 .messageListItem {
-	border-bottom: 1px solid #f3f2f1;
-	border-left: 3px solid transparent;
+	border-bottom: 1px solid #f0f0f0 !important;
+	border-left: 3px solid transparent !important;
+	padding: 12px 16px !important;
+	transition: all 0.1s ease !important;
+	cursor: pointer;
+}
+
+.messageListItem:hover {
+	background-color: #f9f9f9 !important;
 }
 
 .messageListItem.focused,
 .messageListItem.selected,
 .messageListItem.checked {
-	background-color: #eff6fc !important;
-	border-left-color: #0078d4 !important;
-}
-
-.messageListItem:hover {
-	background-color: #f3f2f1;
+	background-color: #ebf3fc !important;
+	border-left-color: #0f6cbd !important;
 }
 
 .messageListItem.unseen {
-	font-weight: 600;
+	font-weight: 600 !important;
 }
 
-/* Buttons - Outlook flat style */
+.messageListItem.unseen::before {
+	content: '' !important;
+	position: absolute;
+	left: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 8px;
+	height: 8px;
+	background: #0f6cbd;
+	border-radius: 50%;
+}
+
+/* Bottom toolbar / footer */
+.messageList .b-footer {
+	background: #fafafa !important;
+	border-top: 1px solid #e8e8e8 !important;
+	border-radius: 0 0 12px 12px !important;
+	padding: 8px 12px !important;
+}
+
+/* Paginator */
+.e-paginator a {
+	color: #0f6cbd !important;
+}
+
+
+/* ==========================================================
+   BUTTONS - FLUENT UI 2 STYLE
+   ========================================================== */
+
 .btn {
-	border-radius: 4px !important;
-	font-weight: 600;
-	text-transform: none;
+	border-radius: 6px !important;
+	font-weight: 500 !important;
+	font-size: 13px !important;
+	padding: 6px 12px !important;
+	transition: all 0.1s ease !important;
 	box-shadow: none !important;
 	text-shadow: none !important;
-	transition: background-color 0.1s ease;
+	text-transform: none !important;
+	border: 1px solid transparent !important;
 }
 
+/* Default/secondary buttons */
 .btn:not(.btn-success):not(.btn-warning):not(.btn-danger) {
-	background-color: #ffffff;
-	color: #323130;
-	border: 1px solid #8a8886;
+	background: #ffffff !important;
+	color: #242424 !important;
+	border-color: #d1d1d1 !important;
 }
 
 .btn:not(.btn-success):not(.btn-warning):not(.btn-danger):hover {
-	background-color: #f3f2f1;
-	border-color: #323130;
+	background: #f5f5f5 !important;
+	border-color: #c7c7c7 !important;
 }
 
+.btn:not(.btn-success):not(.btn-warning):not(.btn-danger):active {
+	background: #ebebeb !important;
+}
+
+/* Transparent/icon buttons */
+.btn.btn-transparent {
+	background: transparent !important;
+	border-color: transparent !important;
+	border-radius: 6px !important;
+	opacity: 0.7 !important;
+	padding: 6px 8px !important;
+}
+
+.btn.btn-transparent:hover {
+	background: #f0f0f0 !important;
+	opacity: 1 !important;
+}
+
+/* Primary buttons */
 .btn.btn-success {
-	background-color: #0078d4 !important;
-	border-color: #0078d4 !important;
+	background: #0f6cbd !important;
+	border-color: #0f6cbd !important;
+	color: #ffffff !important;
+}
+.btn.btn-success:hover {
+	background: #115ea3 !important;
+}
+
+/* Danger button */
+.btn.btn-danger {
+	background: #b10e1c !important;
 	color: #ffffff !important;
 }
 
-.btn.btn-success:hover {
-	background-color: #106ebe !important;
-	border-color: #106ebe !important;
-}
 
-/* Dropdown menus */
+/* ==========================================================
+   DROPDOWN MENUS - ELEVATED & POLISHED
+   ========================================================== */
+
 .dropdown-menu {
-	border-radius: 4px;
-	box-shadow: 0 3.2px 7.2px rgba(0, 0, 0, 0.13), 0 0.6px 1.8px rgba(0, 0, 0, 0.11);
-	border: 1px solid #edebe9;
-	padding: 4px 0;
+	background: #ffffff !important;
+	border: 1px solid rgba(0, 0, 0, 0.08) !important;
+	border-radius: 8px !important;
+	box-shadow:
+		0 8px 32px rgba(0, 0, 0, 0.12),
+		0 2px 8px rgba(0, 0, 0, 0.08) !important;
+	padding: 4px !important;
+	margin-top: 4px !important;
 }
 
-/* Input fields - Outlook underline style */
+.dropdown-menu a,
+.dropdown-menu li a {
+	border-radius: 4px !important;
+	padding: 8px 12px !important;
+	font-size: 13px !important;
+	transition: background-color 0.1s !important;
+	color: #242424 !important;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu li a:hover {
+	background-color: #f5f5f5 !important;
+	color: #242424 !important;
+}
+
+.dropdown-menu * + .dividerbar {
+	margin: 4px 0 !important;
+	padding: 0 !important;
+	border-top: 1px solid #f0f0f0 !important;
+}
+
+
+/* ==========================================================
+   SYSTEM DROPDOWN (Account menu)
+   ========================================================== */
+
+#V-SystemDropDown .accountPlace {
+	border-right-color: #e0e0e0 !important;
+	font-weight: 500 !important;
+	color: #424242 !important;
+}
+
+#V-SystemDropDown {
+	padding: 8px 16px !important;
+}
+
+
+/* ==========================================================
+   INPUT FIELDS - MODERN STYLE
+   ========================================================== */
+
 input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="search"],
+input[type="number"],
 textarea,
-.select,
-select {
-	border-radius: 4px;
-	border: 1px solid #8a8886;
-	transition: border-color 0.1s ease;
+select,
+.select {
+	background: #ffffff !important;
+	border: 1px solid #d1d1d1 !important;
+	border-radius: 6px !important;
+	color: #242424 !important;
+	font-size: 14px !important;
+	padding: 8px 12px !important;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+	outline: none !important;
 }
 
 input[type="text"]:focus,
@@ -204,90 +586,212 @@ input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="search"]:focus,
 textarea:focus {
-	border-color: #0078d4;
-	box-shadow: none;
-	outline: none;
+	border-color: #0f6cbd !important;
+	box-shadow: 0 0 0 2px rgba(15, 108, 189, 0.12) !important;
 }
 
-/* Tabs - Outlook pivot style */
-.tabs [id^="tab"]:checked + label {
-	background: transparent;
-	border-bottom: 2px solid #0078d4;
-	color: #0078d4;
-	font-weight: 600;
+/* Select dropdown arrow */
+select, .select {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23616161' d='M2.5 4.5L6 8l3.5-3.5h-7z'/%3E%3C/svg%3E") !important;
+	background-repeat: no-repeat !important;
+	background-position: right 10px center !important;
+	padding-right: 32px !important;
+	appearance: none !important;
+	-webkit-appearance: none !important;
 }
 
-.tabs label {
-	border-bottom: 2px solid transparent;
-	transition: border-color 0.2s ease;
+
+/* ==========================================================
+   ICON MODERNIZATION
+   ========================================================== */
+
+/* Make fontastic icons more refined */
+.fontastic,
+[class^="icon-"],
+[class*=" icon-"] {
+	font-size: 16px !important;
+	opacity: 0.85;
 }
 
-.tabs label:hover {
-	border-bottom-color: #c8c6c4;
+/* Icon buttons in toolbar should be evenly spaced */
+.btn-toolbar .btn {
+	margin: 0 2px !important;
 }
 
-/* Scrollbar styling */
+/* Spinner modernization */
+.icon-spinner {
+	border-width: 2px !important;
+	border-color: #e0e0e0 !important;
+	border-top-color: #0f6cbd !important;
+}
+
+
+/* ==========================================================
+   TABS - PIVOT STYLE
+   ========================================================== */
+
+.tabs > label {
+	border: none !important;
+	border-bottom: 2px solid transparent !important;
+	border-radius: 0 !important;
+	font-weight: 500 !important;
+	opacity: 0.7 !important;
+	padding: 10px 16px !important;
+	transition: all 0.15s !important;
+}
+
+.tabs > label:hover {
+	opacity: 1 !important;
+	border-bottom-color: #d1d1d1 !important;
+}
+
+.tabs > [id^="tab"]:checked + label {
+	background: transparent !important;
+	border-bottom: 2px solid #0f6cbd !important;
+	color: #0f6cbd !important;
+	font-weight: 600 !important;
+	opacity: 1 !important;
+}
+
+
+/* ==========================================================
+   DIALOGS / MODALS - MODERN ELEVATION
+   ========================================================== */
+
+dialog {
+	border: none !important;
+	border-radius: 12px !important;
+	box-shadow:
+		0 16px 64px rgba(0, 0, 0, 0.14),
+		0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+dialog > header {
+	padding: 16px 20px !important;
+	border-bottom: 1px solid #f0f0f0 !important;
+}
+
+dialog > header h3 {
+	font-size: 18px !important;
+	font-weight: 600 !important;
+}
+
+dialog .modal-body {
+	padding: 20px !important;
+}
+
+dialog > footer {
+	padding: 12px 20px !important;
+	border-top: 1px solid #f0f0f0 !important;
+}
+
+dialog::backdrop {
+	background: rgba(0, 0, 0, 0.4) !important;
+	backdrop-filter: blur(4px) !important;
+}
+
+
+/* ==========================================================
+   SCROLLBARS - MINIMAL
+   ========================================================== */
+
 ::-webkit-scrollbar {
-	width: 6px;
+	width: 8px;
+	height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-	background-color: transparent;
+	background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #c8c6c4;
-	border-radius: 3px;
+	background: #d1d1d1;
+	border-radius: 4px;
+	border: 2px solid transparent;
+	background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: #a19f9d;
+	background: #a0a0a0;
+	border: 2px solid transparent;
+	background-clip: padding-box;
 }
 
-/* Login page branding */
-.LoginView {
-	background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
-}
 
-.LoginView .logo {
-	filter: brightness(10);
-}
+/* ==========================================================
+   MESSAGE VIEW
+   ========================================================== */
 
-/* Compose area */
 #V-MailMessageView {
-	border-left: 1px solid #edebe9;
+	border-left: 1px solid #e8e8e8 !important;
 }
 
-/* Settings page */
-#V-Settings-About .rl-logo {
-	opacity: 0.8;
+.messageView .b-message {
+	background: #ffffff;
 }
 
-/* Badge/pill styling for unread counts */
-.badge {
-	font-weight: 600;
-	font-size: 11px;
+/* Message header area */
+.messageView .top-toolbar {
+	padding: 12px 16px !important;
+	border-bottom: 1px solid #f0f0f0 !important;
 }
 
-/* Table styling */
+
+/* ==========================================================
+   SETTINGS PANEL
+   ========================================================== */
+
+#V-SettingsPane .legend {
+	font-weight: 600 !important;
+	font-size: 140% !important;
+	border-bottom-color: #e8e8e8 !important;
+}
+
+
+/* ==========================================================
+   MISC POLISH
+   ========================================================== */
+
+/* Checkbox modernization */
+.e-checkbox.material-design > div > div {
+	border-color: #757575 !important;
+	border-radius: 3px !important;
+}
+
+/* Table hover rows */
 .table-hover tbody tr:hover td,
 .table-hover tbody tr:hover th {
-	background-color: #f3f2f1;
+	background-color: #f5f5f5 !important;
 }
 
 .table-striped tbody tr:nth-child(2n+1) td,
 .table-striped tbody tr:nth-child(2n+1) th {
-	background-color: #faf9f8;
+	background-color: #fafafa !important;
 }
 
-/* Dialog/Modal backdrop */
-.modal-overlay {
-	background-color: rgba(0, 0, 0, 0.4);
+/* Alert boxes */
+.alert {
+	border-radius: 8px !important;
+	padding: 12px 16px !important;
 }
 
-/* Search bar */
-.thm-message-list-search-desc {
-	background-color: #eff6fc;
-	border: 1px solid #0078d4;
-	border-radius: 4px;
+/* About page logo */
+#V-Settings-About .rl-logo {
+	opacity: 0.7;
+}
+
+/* Smooth transitions for panel resize */
+#rl-left {
+	transition: width 0.15s ease !important;
+}
+
+/* Group label in message list */
+.messageList .groupLabel {
+	background: #f5f5f5 !important;
+	font-weight: 600 !important;
+	font-size: 11px !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.05em !important;
+	padding: 6px 16px !important;
+	color: #757575 !important;
 }

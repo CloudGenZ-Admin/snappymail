@@ -1,0 +1,299 @@
+/*
+ * White-Label Branding Styles
+ * Premium login page + branding integration
+ * Works in harmony with Outlook/OutlookDark themes
+ */
+
+/* ===== LOGIN VIEW CONTAINER ===== */
+.LoginView {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	padding: 20px;
+}
+
+.LoginView > div {
+	width: 100%;
+	max-width: 420px;
+}
+
+/* ===== BRANDING HEADER ===== */
+.wl-branding-header {
+	text-align: center;
+	margin-bottom: 32px;
+}
+
+.wl-branding-header .wl-logo {
+	max-height: 56px;
+	width: auto;
+	margin-bottom: 16px;
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.wl-branding-header .wl-company-name {
+	margin: 0 !important;
+	font-size: 24px !important;
+	font-weight: 600 !important;
+	letter-spacing: -0.02em !important;
+	color: var(--login-color, #242424) !important;
+}
+
+/* ===== FORM GROUPS ===== */
+.wl-form-group {
+	margin-bottom: 20px;
+}
+
+.wl-label {
+	display: block;
+	font-size: 13px;
+	font-weight: 600;
+	margin-bottom: 6px;
+	color: var(--login-color, #242424);
+	letter-spacing: 0.01em;
+}
+
+.wl-input-wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.wl-input-icon {
+	position: absolute;
+	left: 14px;
+	font-size: 16px;
+	color: #757575;
+	pointer-events: none;
+	z-index: 1;
+	transition: color 0.15s ease;
+}
+
+.wl-form-group:focus-within .wl-input-icon {
+	color: var(--wl-primary-color, #0f6cbd);
+}
+
+.wl-input {
+	width: 100%;
+	padding: 12px 16px 12px 44px;
+	font-size: 15px;
+	border: 2px solid #e0e0e0;
+	border-radius: 8px;
+	background: #f5f5f5;
+	color: var(--login-color, #242424);
+	transition: all 0.15s ease;
+	outline: none;
+	box-sizing: border-box;
+	font-family: inherit;
+}
+
+.wl-input:hover {
+	border-color: #c7c7c7;
+}
+
+.wl-input:focus {
+	background: #ffffff;
+	border-color: var(--wl-primary-color, #0f6cbd);
+	box-shadow: 0 0 0 3px rgba(15, 108, 189, 0.1);
+}
+
+.wl-form-group.error .wl-input {
+	border-color: #b10e1c;
+	box-shadow: 0 0 0 3px rgba(177, 14, 28, 0.08);
+}
+
+.wl-form-group.error .wl-input-icon {
+	color: #b10e1c;
+}
+
+/* ===== OPTIONS ROW ===== */
+.wl-options-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 28px;
+	font-size: 13px;
+}
+
+.wl-options-row .e-checkbox {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	cursor: pointer;
+	color: #616161;
+}
+
+.wl-options-row .language-button {
+	font-size: 18px;
+	text-decoration: none;
+	opacity: 0.6;
+	transition: opacity 0.15s;
+}
+
+.wl-options-row .language-button:hover {
+	opacity: 1;
+}
+
+/* ===== SUBMIT BUTTON ===== */
+.wl-submit-row {
+	margin-top: 4px;
+}
+
+.wl-btn-login {
+	width: 100%;
+	padding: 14px 24px !important;
+	font-size: 15px !important;
+	font-weight: 600 !important;
+	letter-spacing: 0.02em !important;
+	border-radius: 8px !important;
+	border: none !important;
+	background: linear-gradient(180deg,
+		color-mix(in srgb, var(--wl-primary-color, #0f6cbd) 85%, white) 0%,
+		var(--wl-primary-color, #0f6cbd) 100%
+	) !important;
+	color: #ffffff !important;
+	cursor: pointer;
+	transition: all 0.15s ease !important;
+	box-shadow: 0 3px 10px rgba(15, 108, 189, 0.25) !important;
+	text-shadow: none !important;
+	text-transform: none !important;
+}
+
+.wl-btn-login:hover {
+	box-shadow: 0 6px 20px rgba(15, 108, 189, 0.35) !important;
+	transform: translateY(-1px);
+}
+
+.wl-btn-login:active {
+	transform: translateY(0) !important;
+	box-shadow: 0 2px 6px rgba(15, 108, 189, 0.2) !important;
+}
+
+.wl-btn-login:disabled,
+.wl-btn-login[disabled] {
+	opacity: 0.5;
+	cursor: not-allowed;
+	transform: none !important;
+}
+
+/* ===== FOOTER ===== */
+.wl-footer {
+	text-align: center;
+	margin-top: 28px;
+	padding-top: 20px;
+	border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.wl-powered-by {
+	font-size: 12px;
+	color: #9e9e9e;
+	letter-spacing: 0.02em;
+}
+
+/* ===== ERROR ALERT ===== */
+.LoginView .alert {
+	background: #fdf3f4 !important;
+	border: 1px solid #eeacb2 !important;
+	border-radius: 8px !important;
+	padding: 12px 16px !important;
+	margin-bottom: 20px !important;
+	color: #b10e1c !important;
+	font-size: 13px !important;
+	position: relative !important;
+}
+
+.LoginView .alert .close {
+	position: absolute !important;
+	top: 10px !important;
+	right: 12px !important;
+	font-size: 16px !important;
+	text-decoration: none !important;
+	opacity: 0.7 !important;
+}
+
+.LoginView .alert .close:hover {
+	opacity: 1 !important;
+}
+
+/* ===== LOADING STATE ===== */
+.LoginView .descWrapper {
+	text-align: center;
+	padding: 12px;
+	font-size: 15px;
+}
+
+/* ===== FORM SUBMITTING STATE ===== */
+form.submitting .wl-btn-login {
+	position: relative;
+	color: transparent !important;
+}
+
+form.submitting .wl-btn-login::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 22px;
+	height: 22px;
+	margin: -11px 0 0 -11px;
+	border: 2.5px solid rgba(255, 255, 255, 0.3);
+	border-top-color: #ffffff;
+	border-radius: 50%;
+	animation: wl-spin 0.6s linear infinite;
+}
+
+@keyframes wl-spin {
+	to { transform: rotate(360deg); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+	.LoginView > div {
+		max-width: 100%;
+	}
+
+	.LoginView form {
+		padding: 32px 24px 28px !important;
+		border-radius: 12px !important;
+	}
+}
+
+/* ===== DARK MODE COMPATIBILITY ===== */
+:root[style*="color-scheme: dark"] .wl-input,
+.OutlookDark .wl-input {
+	background: #1a1a1a;
+	border-color: #404040;
+	color: #e4e4e4;
+}
+
+:root[style*="color-scheme: dark"] .wl-input:focus {
+	background: #242424;
+	border-color: #62abf5;
+	box-shadow: 0 0 0 3px rgba(98, 171, 245, 0.12);
+}
+
+:root[style*="color-scheme: dark"] .wl-label {
+	color: #e4e4e4;
+}
+
+:root[style*="color-scheme: dark"] .wl-input-icon {
+	color: #8a8a8a;
+}
+
+:root[style*="color-scheme: dark"] .wl-footer {
+	border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+:root[style*="color-scheme: dark"] .wl-powered-by {
+	color: #6b6b6b;
+}
+
+:root[style*="color-scheme: dark"] .wl-options-row .e-checkbox {
+	color: #a0a0a0;
+}
+
+:root[style*="color-scheme: dark"] .LoginView .alert {
+	background: #3b1f20 !important;
+	border-color: #8e3135 !important;
+	color: #f5a3a8 !important;
+}
