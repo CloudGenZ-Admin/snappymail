@@ -67,7 +67,7 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
-          server-dir: /home/u930449354/snappymail-data/_data_/_default_/plugins/
+          server-dir: snappymail-data/_data_/_default_/plugins/
           local-dir: ./plugin-deploy/
 
       - name: Clear SnappyMail CSS cache
@@ -76,6 +76,6 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
-          server-dir: /home/u930449354/snappymail-data/_data_/_default_/cache/
+          server-dir: snappymail-data/_data_/_default_/cache/
           local-dir: ./empty-cache/
           dangerous-clean-slate: true
