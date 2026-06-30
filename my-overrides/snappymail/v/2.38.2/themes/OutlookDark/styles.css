@@ -1,0 +1,316 @@
+/*
+ * Outlook Dark Theme for SnappyMail
+ * Mimics Microsoft Outlook Web's dark mode appearance
+ */
+:root {
+	color-scheme: dark;
+
+	/* MAIN */
+	--main-color: #ffffff;
+	--main-bg-color: #1b1a19;
+	--main-bg-image: none;
+	--main-bg-size: auto;
+	--main-bg-repeat: no-repeat;
+	--main-font-size: 14px;
+	--link-color: #6cb8f6;
+	--border-color: #3b3a39;
+	--border-radius: 4px;
+	--hr-color: #3b3a39;
+
+	--panel-bg-clr: #292827;
+
+	--warning-clr: #fce100;
+	--warning-bg-clr: #3d3428;
+	--warning-border-clr: #fce100;
+
+	--error-clr: #f1707b;
+	--error-bg-clr: #442726;
+	--error-border-clr: #f1707b;
+
+	--info-clr: #6cb8f6;
+	--info-bg-clr: #1a3048;
+	--info-border-clr: #6cb8f6;
+
+	/* LOADING */
+	--loading-color: #6cb8f6;
+	--loading-text-shadow: none;
+
+	/* LOGIN */
+	--login-color: #ffffff;
+	--login-bg-color: #292827;
+	--login-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+	--login-border: 1px solid #3b3a39;
+	--login-border-radius: 4px;
+
+	--spinner-color: #6cb8f6;
+
+	/* MENU */
+	--dropdown-menu-color: #ffffff;
+	--dropdown-menu-bg-color: #292827;
+	--dropdown-menu-hover-bg-color: #3b3a39;
+	--dropdown-menu-hover-color: #ffffff;
+	--dropdown-menu-disabled-color: #8a8886;
+	--dropdown-menu-border-clr: #484644;
+
+	/* FOLDERS */
+	--folders-color: #d2d0ce;
+	--folders-disabled-color: #8a8886;
+	--folders-selected-color: #6cb8f6;
+	--folders-selected-bg-color: #3b3a39;
+	--folders-focused-color: #6cb8f6;
+	--folders-focused-bg-color: #484644;
+	--folders-hover-color: #ffffff;
+	--folders-hover-bg-color: #323130;
+	--folders-drop-color: #6cb8f6;
+	--folders-drop-bg-color: #1a3048;
+	--unread-count-color: #6cb8f6;
+	--unread-count-bg-color: transparent;
+
+	/* SETTINGS */
+	--settings-menu-color: #d2d0ce;
+	--settings-menu-selected-color: #6cb8f6;
+	--settings-menu-selected-bg-color: #3b3a39;
+	--settings-menu-hover-color: #ffffff;
+	--settings-menu-hover-bg-color: #323130;
+
+	/* MESSAGES */
+	--message-list-toolbar-bg-color: #292827;
+	--message-header-bg-clr: #1b1a19;
+
+	/* DIALOGS */
+	--dialog-clr: #ffffff;
+	--dialog-bg-clr: #292827;
+	--dialog-border-clr: #484644;
+	--dialog-border-radius: 4px;
+
+	/* FORMS */
+	--btn-clr: #ffffff;
+	--btn-bg-clr: #2b88d8;
+	--btn-border-clr: #2b88d8;
+	--btn-border-radius: 4px;
+	--btn-success-bg-clr: #2b88d8;
+	--btn-danger-bg-clr: #f1707b;
+
+	--input-clr: #ffffff;
+	--input-bg-clr: #1b1a19;
+	--input-border-clr: #605e5c;
+	--input-border-radius: 4px;
+	--input-focus-border-clr: #6cb8f6;
+
+	/* TABLES */
+	--tr-hover-bg-clr: #323130;
+	--tr-odd-bg-clr: #1b1a19;
+
+	/* TABS */
+	--tab-active-bg-clr: #292827;
+	--tab-hover-border-clr: #6cb8f6;
+
+	--smDialogShrink: 20px;
+	--smMainShadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== OUTLOOK DARK MODE OVERRIDES ===== */
+
+/* Top toolbar */
+.thm-message-list-top-toolbar,
+.thm-message-list-bottom-toolbar {
+	background-color: #292827 !important;
+	background-image: none !important;
+	border-bottom: 1px solid #3b3a39 !important;
+}
+
+/* Folder list styling */
+#V-MailFolderList {
+	background-color: #201f1e;
+	border-right: 1px solid #3b3a39;
+}
+
+/* Message list items */
+.messageListItem {
+	border-bottom: 1px solid #292827;
+	border-left: 3px solid transparent;
+}
+
+.messageListItem.focused,
+.messageListItem.selected,
+.messageListItem.checked {
+	background-color: #1a3048 !important;
+	border-left-color: #6cb8f6 !important;
+}
+
+.messageListItem:hover {
+	background-color: #323130;
+}
+
+.messageListItem.unseen {
+	font-weight: 600;
+}
+
+/* Buttons - Outlook flat dark style */
+.btn {
+	border-radius: 4px !important;
+	font-weight: 600;
+	text-transform: none;
+	box-shadow: none !important;
+	text-shadow: none !important;
+	transition: background-color 0.1s ease;
+}
+
+.btn:not(.btn-success):not(.btn-warning):not(.btn-danger) {
+	background-color: #323130;
+	color: #ffffff;
+	border: 1px solid #605e5c;
+}
+
+.btn:not(.btn-success):not(.btn-warning):not(.btn-danger):hover {
+	background-color: #3b3a39;
+	border-color: #8a8886;
+}
+
+.btn.btn-success {
+	background-color: #2b88d8 !important;
+	border-color: #2b88d8 !important;
+	color: #ffffff !important;
+}
+
+.btn.btn-success:hover {
+	background-color: #3c96df !important;
+	border-color: #3c96df !important;
+}
+
+/* Dropdown menus */
+.dropdown-menu {
+	border-radius: 4px;
+	box-shadow: 0 3.2px 7.2px rgba(0, 0, 0, 0.4), 0 0.6px 1.8px rgba(0, 0, 0, 0.3);
+	border: 1px solid #484644;
+	padding: 4px 0;
+}
+
+.dropdown-menu .dividerbar {
+	border-color: #3b3a39;
+}
+
+/* Input fields */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea,
+.select,
+select {
+	border-radius: 4px;
+	border: 1px solid #605e5c;
+	background-color: #1b1a19;
+	color: #ffffff;
+	transition: border-color 0.1s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+textarea:focus {
+	border-color: #6cb8f6;
+	box-shadow: none;
+	outline: none;
+}
+
+/* Tabs - Outlook pivot style (dark) */
+.tabs [id^="tab"]:checked + label {
+	background: transparent;
+	border-bottom: 2px solid #6cb8f6;
+	color: #6cb8f6;
+	font-weight: 600;
+}
+
+.tabs label {
+	color: #d2d0ce;
+	border-bottom: 2px solid transparent;
+	transition: border-color 0.2s ease;
+}
+
+.tabs label:hover {
+	border-bottom-color: #605e5c;
+	color: #ffffff;
+}
+
+/* Scrollbar styling (dark) */
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: #1b1a19;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #484644;
+	border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #605e5c;
+}
+
+/* Login page branding */
+.LoginView {
+	background: linear-gradient(135deg, #1a3048 0%, #0d1b2a 100%);
+}
+
+.LoginView .logo {
+	filter: brightness(10);
+}
+
+/* Compose / message view area */
+#V-MailMessageView {
+	border-left: 1px solid #3b3a39;
+}
+
+/* Settings page */
+#V-Settings-About .rl-logo {
+	filter: invert(1);
+}
+
+/* Badge/pill styling for unread counts */
+.badge {
+	font-weight: 600;
+	font-size: 11px;
+}
+
+/* Table styling */
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+	background-color: #323130;
+}
+
+.table-striped tbody tr:nth-child(2n+1) td,
+.table-striped tbody tr:nth-child(2n+1) th {
+	background-color: #1b1a19;
+}
+
+/* Dialog/Modal backdrop */
+.modal-overlay {
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Search bar */
+.thm-message-list-search-desc {
+	background-color: #1a3048;
+	border: 1px solid #2b88d8;
+	border-radius: 4px;
+}
+
+/* System dropdown */
+#V-SystemDropDown .accountPlace {
+	color: #d2d0ce;
+}
+
+/* Select dropdown arrow for dark mode */
+.select, select {
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIGhlaWdodD0nMTBweCcgd2lkdGg9JzE1cHgnPjx0ZXh0IHg9JzAnIHk9JzEwJyBmaWxsPSdyZ2IoMjU1LDI1NSwyNTUpJz7ilr48L3RleHQ+PC9zdmc+);
+}
+
+/* Blockquote in messages */
+#messageItem .b-text-part blockquote {
+	border-color: #605e5c;
+}

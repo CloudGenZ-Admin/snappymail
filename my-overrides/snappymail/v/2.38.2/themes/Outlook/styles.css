@@ -1,0 +1,293 @@
+/*
+ * Outlook Light Theme for SnappyMail
+ * Mimics Microsoft Outlook Web's clean, professional appearance
+ */
+:root {
+	color-scheme: light;
+
+	/* MAIN */
+	--main-color: #323130;
+	--main-bg-color: #f3f2f1;
+	--main-bg-image: none;
+	--main-bg-size: auto;
+	--main-bg-repeat: no-repeat;
+	--main-font-size: 14px;
+	--link-color: #0078d4;
+	--border-color: #edebe9;
+	--border-radius: 4px;
+	--hr-color: #edebe9;
+
+	--panel-bg-clr: #ffffff;
+
+	--warning-clr: #797673;
+	--warning-bg-clr: #fff4ce;
+	--warning-border-clr: #fce100;
+
+	--error-clr: #a80000;
+	--error-bg-clr: #fde7e9;
+	--error-border-clr: #a80000;
+
+	--info-clr: #0078d4;
+	--info-bg-clr: #eff6fc;
+	--info-border-clr: #0078d4;
+
+	/* LOADING */
+	--loading-color: #0078d4;
+	--loading-text-shadow: none;
+
+	/* LOGIN */
+	--login-color: #323130;
+	--login-bg-color: #ffffff;
+	--login-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+	--login-border: 1px solid #edebe9;
+	--login-border-radius: 4px;
+
+	--spinner-color: #0078d4;
+
+	/* MENU */
+	--dropdown-menu-color: #323130;
+	--dropdown-menu-bg-color: #ffffff;
+	--dropdown-menu-hover-bg-color: #f3f2f1;
+	--dropdown-menu-hover-color: #323130;
+	--dropdown-menu-disabled-color: #a19f9d;
+	--dropdown-menu-border-clr: #edebe9;
+
+	/* FOLDERS */
+	--folders-color: #323130;
+	--folders-disabled-color: #a19f9d;
+	--folders-selected-color: #0078d4;
+	--folders-selected-bg-color: #edebe9;
+	--folders-focused-color: #0078d4;
+	--folders-focused-bg-color: #e1dfdd;
+	--folders-hover-color: #323130;
+	--folders-hover-bg-color: #f3f2f1;
+	--folders-drop-color: #0078d4;
+	--folders-drop-bg-color: #deecf9;
+	--unread-count-color: #0078d4;
+	--unread-count-bg-color: transparent;
+
+	/* SETTINGS */
+	--settings-menu-color: #323130;
+	--settings-menu-selected-color: #0078d4;
+	--settings-menu-selected-bg-color: #edebe9;
+	--settings-menu-hover-color: #323130;
+	--settings-menu-hover-bg-color: #f3f2f1;
+
+	/* MESSAGES */
+	--message-list-toolbar-bg-color: #ffffff;
+	--message-header-bg-clr: #f9f8f7;
+
+	/* DIALOGS */
+	--dialog-clr: #323130;
+	--dialog-bg-clr: #ffffff;
+	--dialog-border-clr: #edebe9;
+	--dialog-border-radius: 4px;
+
+	/* FORMS */
+	--btn-clr: #ffffff;
+	--btn-bg-clr: #0078d4;
+	--btn-border-clr: #0078d4;
+	--btn-border-radius: 4px;
+	--btn-success-bg-clr: #107c10;
+	--btn-danger-bg-clr: #a80000;
+
+	--input-clr: #323130;
+	--input-bg-clr: #ffffff;
+	--input-border-clr: #8a8886;
+	--input-border-radius: 4px;
+	--input-focus-border-clr: #0078d4;
+
+	/* TABLES */
+	--tr-hover-bg-clr: #f3f2f1;
+	--tr-odd-bg-clr: #faf9f8;
+
+	/* TABS */
+	--tab-active-bg-clr: #ffffff;
+	--tab-hover-border-clr: #0078d4;
+
+	--smDialogShrink: 20px;
+	--smMainShadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== OUTLOOK-SPECIFIC OVERRIDES ===== */
+
+/* Top toolbar - Outlook command bar style */
+.thm-message-list-top-toolbar,
+.thm-message-list-bottom-toolbar {
+	background-color: #ffffff !important;
+	background-image: none !important;
+	border-bottom: 1px solid #edebe9 !important;
+}
+
+/* Folder list styling */
+#V-MailFolderList {
+	background-color: #faf9f8;
+	border-right: 1px solid #edebe9;
+}
+
+/* Message list items */
+.messageListItem {
+	border-bottom: 1px solid #f3f2f1;
+	border-left: 3px solid transparent;
+}
+
+.messageListItem.focused,
+.messageListItem.selected,
+.messageListItem.checked {
+	background-color: #eff6fc !important;
+	border-left-color: #0078d4 !important;
+}
+
+.messageListItem:hover {
+	background-color: #f3f2f1;
+}
+
+.messageListItem.unseen {
+	font-weight: 600;
+}
+
+/* Buttons - Outlook flat style */
+.btn {
+	border-radius: 4px !important;
+	font-weight: 600;
+	text-transform: none;
+	box-shadow: none !important;
+	text-shadow: none !important;
+	transition: background-color 0.1s ease;
+}
+
+.btn:not(.btn-success):not(.btn-warning):not(.btn-danger) {
+	background-color: #ffffff;
+	color: #323130;
+	border: 1px solid #8a8886;
+}
+
+.btn:not(.btn-success):not(.btn-warning):not(.btn-danger):hover {
+	background-color: #f3f2f1;
+	border-color: #323130;
+}
+
+.btn.btn-success {
+	background-color: #0078d4 !important;
+	border-color: #0078d4 !important;
+	color: #ffffff !important;
+}
+
+.btn.btn-success:hover {
+	background-color: #106ebe !important;
+	border-color: #106ebe !important;
+}
+
+/* Dropdown menus */
+.dropdown-menu {
+	border-radius: 4px;
+	box-shadow: 0 3.2px 7.2px rgba(0, 0, 0, 0.13), 0 0.6px 1.8px rgba(0, 0, 0, 0.11);
+	border: 1px solid #edebe9;
+	padding: 4px 0;
+}
+
+/* Input fields - Outlook underline style */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea,
+.select,
+select {
+	border-radius: 4px;
+	border: 1px solid #8a8886;
+	transition: border-color 0.1s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+textarea:focus {
+	border-color: #0078d4;
+	box-shadow: none;
+	outline: none;
+}
+
+/* Tabs - Outlook pivot style */
+.tabs [id^="tab"]:checked + label {
+	background: transparent;
+	border-bottom: 2px solid #0078d4;
+	color: #0078d4;
+	font-weight: 600;
+}
+
+.tabs label {
+	border-bottom: 2px solid transparent;
+	transition: border-color 0.2s ease;
+}
+
+.tabs label:hover {
+	border-bottom-color: #c8c6c4;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #c8c6c4;
+	border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #a19f9d;
+}
+
+/* Login page branding */
+.LoginView {
+	background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
+}
+
+.LoginView .logo {
+	filter: brightness(10);
+}
+
+/* Compose area */
+#V-MailMessageView {
+	border-left: 1px solid #edebe9;
+}
+
+/* Settings page */
+#V-Settings-About .rl-logo {
+	opacity: 0.8;
+}
+
+/* Badge/pill styling for unread counts */
+.badge {
+	font-weight: 600;
+	font-size: 11px;
+}
+
+/* Table styling */
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+	background-color: #f3f2f1;
+}
+
+.table-striped tbody tr:nth-child(2n+1) td,
+.table-striped tbody tr:nth-child(2n+1) th {
+	background-color: #faf9f8;
+}
+
+/* Dialog/Modal backdrop */
+.modal-overlay {
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Search bar */
+.thm-message-list-search-desc {
+	background-color: #eff6fc;
+	border: 1px solid #0078d4;
+	border-radius: 4px;
+}
