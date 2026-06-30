@@ -331,7 +331,7 @@
 
 .messageListItem {
 	border-bottom: 1px solid #2d2d2d !important;
-	border-left: 3px solid transparent !important;
+	border-left: 4px solid transparent !important;
 	transition: background-color 0.1s !important;
 }
 
@@ -348,6 +348,7 @@
 
 .messageListItem.unseen {
 	font-weight: 600 !important;
+	border-left-color: #62abf5 !important;
 }
 
 .messageList .b-footer {
