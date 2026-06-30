@@ -251,8 +251,18 @@ html, body, #rl-app {
 	border-right: 1px solid #333333 !important;
 }
 
+/* Logo in sidebar */
+#V-MailFolderList .b-folders::before {
+	content: '';
+	display: block;
+	background: url('https://cloudgenz.com/assets/img/favicon.png') no-repeat center;
+	background-size: contain;
+	height: 32px;
+	margin: 12px 16px 8px;
+}
+
 #rl-left .b-toolbar {
-	padding: 12px 8px !important;
+	padding: 8px 8px !important;
 }
 
 /* FIX: Compose button text cutoff */
