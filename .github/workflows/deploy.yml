@@ -31,9 +31,14 @@ jobs:
       - name: Apply plugin customizations
         run: |
           # Plugins go into the data directory, NOT the webroot
-          # Create a separate directory for plugin files to upload to data path
           mkdir -p plugin-deploy
           cp -r custom/my-overrides/plugins/* plugin-deploy/ 2>/dev/null || true
+
+      - name: Prepare cache clear
+        run: |
+          # Create empty dir - deploying it with dangerous-clean-slate wipes the cache
+          mkdir -p empty-cache
+          touch empty-cache/.gitkeep
 
       - name: Set data path
         run: |
@@ -62,3 +67,13 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           server-dir: /snappymail-data/_data_/_default_/plugins/
           local-dir: ./plugin-deploy/
+
+      - name: Clear SnappyMail CSS cache
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          server-dir: /snappymail-data/_data_/_default_/cache/
+          local-dir: ./empty-cache/
+          dangerous-clean-slate: true
