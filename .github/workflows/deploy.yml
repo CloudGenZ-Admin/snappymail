@@ -23,11 +23,17 @@ jobs:
           mkdir release
           tar -xzf snappymail-*.tar.gz -C release
 
-      - name: Apply my customizations
+      - name: Apply theme customizations
         run: |
-          # Copy any custom files over the release
-          # e.g. themes, plugins, branding
-          cp -r custom/my-overrides/* release/ 2>/dev/null || true
+          # Copy themes into the release (these are in the correct path)
+          cp -r custom/my-overrides/snappymail/* release/snappymail/ 2>/dev/null || true
+
+      - name: Apply plugin customizations
+        run: |
+          # Plugins go into the data directory, NOT the webroot
+          # Create a separate directory for plugin files to upload to data path
+          mkdir -p plugin-deploy
+          cp -r custom/my-overrides/plugins/* plugin-deploy/ 2>/dev/null || true
 
       - name: Set data path
         run: |
@@ -39,7 +45,7 @@ jobs:
       - name: Remove data folder from deploy
         run: rm -rf release/data
 
-      - name: Deploy via FTP
+      - name: Deploy app via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
@@ -47,3 +53,12 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           server-dir: /public_html/
           local-dir: ./release/
+
+      - name: Deploy plugins via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          server-dir: /snappymail-data/_data_/_default_/plugins/
+          local-dir: ./plugin-deploy/

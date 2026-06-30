@@ -245,9 +245,11 @@
 /* FIX: Compose button text cutoff - override max-height */
 #rl-left .buttonCompose {
 	max-height: none !important;
+	max-width: none !important;
 	overflow: visible !important;
 	text-overflow: unset !important;
 	height: auto !important;
+	width: auto !important;
 	padding: 6px 14px !important;
 	border-radius: 4px !important;
 	background: #0f6cbd !important;
@@ -433,16 +435,24 @@
 /* Fix: Reply/menu buttons toolbar positioning */
 .messageView .message-fixed-button-toolbar {
 	position: absolute !important;
-	top: 8px !important;
-	right: 8px !important;
+	top: 33px !important;
+	right: 10px !important;
 	z-index: 100 !important;
 	display: flex !important;
-	gap: 4px !important;
+	gap: 2px !important;
+	flex-wrap: nowrap !important;
 }
 
 .messageView .message-fixed-button-toolbar .btn {
 	padding: 4px 8px !important;
 	font-size: 13px !important;
+	white-space: nowrap !important;
+	overflow: visible !important;
+}
+
+/* Ensure the message header has enough space for the buttons */
+.messageView .messageItemHeader .subjectParent {
+	padding-right: 120px !important;
 }
 
 /* Message header */
@@ -450,6 +460,7 @@
 	background: #fafafa !important;
 	border-bottom: 1px solid #e8e8e8 !important;
 	padding: 12px !important;
+	position: relative !important;
 }
 
 
