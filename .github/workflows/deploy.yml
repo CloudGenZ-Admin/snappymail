@@ -12,7 +12,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout my customizations
+      - name: Checkout customizations
         uses: actions/checkout@v4
         with:
           path: custom
@@ -23,12 +23,12 @@ jobs:
           mkdir release
           tar -xzf snappymail-*.tar.gz -C release
 
-      - name: Remove old themes and apply custom ones
+      - name: Apply themes (replace defaults with custom)
         run: |
           rm -rf release/snappymail/v/${SNAPPYMAIL_VERSION}/themes/*
-          cp -r custom/my-overrides/snappymail/* release/snappymail/ 2>/dev/null || true
+          cp -r custom/my-overrides/snappymail/* release/snappymail/
 
-      - name: Include plugins for setup script to install
+      - name: Include plugin source for installer
         run: |
           mkdir -p release/_plugins_source
           cp -r custom/my-overrides/plugins/* release/_plugins_source/
@@ -37,31 +37,29 @@ jobs:
         run: |
           cat > release/setup-plugins.php << 'PHPEOF'
           <?php
-          // One-time script: copies plugins to the correct data directory
-          // Visit https://mail.cloudgenz.com/setup-plugins.php to run
+          // Plugin installer - copies plugins to the data directory and clears cache.
+          // Visit: https://mail.cloudgenz.com/setup-plugins.php
+          // Safe to leave deployed; only runs when accessed directly.
+
           $dataPath = '/home/u930449354/snappymail-data/_data_/_default_/plugins/';
           $sourcePath = __DIR__ . '/_plugins_source/';
 
           if (!is_dir($sourcePath)) {
-              die('No plugins source found.');
+              die('Error: No plugin source found. Deploy may have failed.');
           }
 
-          // Create plugins directory if needed
           if (!is_dir($dataPath)) {
               mkdir($dataPath, 0755, true);
           }
 
-          // Copy recursively
           function copyDir($src, $dst) {
               if (!is_dir($dst)) mkdir($dst, 0755, true);
               foreach (scandir($src) as $file) {
                   if ($file === '.' || $file === '..') continue;
-                  $srcPath = $src . '/' . $file;
-                  $dstPath = $dst . '/' . $file;
-                  if (is_dir($srcPath)) {
-                      copyDir($srcPath, $dstPath);
+                  if (is_dir("$src/$file")) {
+                      copyDir("$src/$file", "$dst/$file");
                   } else {
-                      copy($srcPath, $dstPath);
+                      copy("$src/$file", "$dst/$file");
                   }
               }
           }
@@ -71,20 +69,26 @@ jobs:
           // Clear CSS cache
           $cachePath = '/home/u930449354/snappymail-data/_data_/_default_/cache/';
           if (is_dir($cachePath)) {
-              foreach (new RecursiveIteratorIterator(
+              $iter = new RecursiveIteratorIterator(
                   new RecursiveDirectoryIterator($cachePath, FilesystemIterator::SKIP_DOTS),
                   RecursiveIteratorIterator::CHILD_FIRST
-              ) as $item) {
-                  $item->isDir() ? rmdir($item) : unlink($item);
+              );
+              foreach ($iter as $item) {
+                  $item->isDir() ? @rmdir($item) : @unlink($item);
               }
           }
 
-          echo "Done! Plugins installed and cache cleared.\n";
-          echo "Installed to: " . $dataPath . "\n";
+          echo "<pre>\n";
+          echo "Done! Plugins installed and cache cleared.\n\n";
+          echo "Installed to: $dataPath\n\n";
           echo "Files:\n";
-          foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dataPath, FilesystemIterator::SKIP_DOTS)) as $file) {
+          $iter = new RecursiveIteratorIterator(
+              new RecursiveDirectoryIterator($dataPath, FilesystemIterator::SKIP_DOTS)
+          );
+          foreach ($iter as $file) {
               echo "  " . str_replace($dataPath, '', $file) . "\n";
           }
+          echo "</pre>";
           PHPEOF
 
       - name: Set data path

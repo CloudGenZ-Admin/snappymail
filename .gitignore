@@ -1,10 +1,11 @@
 # Ignore everything
 *
 
-# Except our customizations
+# Except our files
 !.gitignore
 !README.md
 !.github/
-!.github/**
+!.github/workflows/
+!.github/workflows/deploy.yml
 !my-overrides/
 !my-overrides/**
