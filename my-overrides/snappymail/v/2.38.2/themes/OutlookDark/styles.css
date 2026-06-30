@@ -246,8 +246,9 @@
 #rl-left .buttonCompose {
 	max-height: none !important;
 	overflow: visible !important;
+	text-overflow: unset !important;
 	height: auto !important;
-	padding: 8px 14px !important;
+	padding: 6px 14px !important;
 	border-radius: 4px !important;
 	background: #2b6cb0 !important;
 	border: none !important;
@@ -255,6 +256,7 @@
 	font-weight: 600 !important;
 	box-shadow: none !important;
 	text-shadow: none !important;
+	white-space: nowrap !important;
 }
 
 #rl-left .buttonCompose:hover {
@@ -351,8 +353,6 @@
 	text-transform: none !important;
 	box-shadow: none !important;
 	text-shadow: none !important;
-	overflow: visible !important;
-	white-space: nowrap !important;
 }
 
 .btn:not(.btn-success):not(.btn-warning):not(.btn-danger) {
@@ -581,4 +581,148 @@ dialog::backdrop {
 .icon-spinner {
 	border-color: #4d4d4d !important;
 	border-top-color: #62abf5 !important;
+}
+
+
+/* ==========================================================
+   COMPOSE POPUP - MODERN DARK DESIGN
+   ========================================================== */
+
+#V-PopupsCompose {
+	border-radius: 8px !important;
+	border: 1px solid #404040 !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+	overflow: hidden !important;
+}
+
+/* Compose header bar */
+#V-PopupsCompose > header {
+	background: #2b6cb0 !important;
+	color: #ffffff !important;
+	padding: 10px 16px !important;
+	border-bottom: none !important;
+}
+
+#V-PopupsCompose > header * {
+	color: #ffffff !important;
+}
+
+#V-PopupsCompose > header .close,
+#V-PopupsCompose > header .minimize-custom {
+	border-color: rgba(255, 255, 255, 0.5) !important;
+	opacity: 0.8 !important;
+}
+
+#V-PopupsCompose > header .close:hover,
+#V-PopupsCompose > header .minimize-custom:hover {
+	opacity: 1 !important;
+}
+
+#V-PopupsCompose > header .btn {
+	background: rgba(255, 255, 255, 0.1) !important;
+	border: 1px solid rgba(255, 255, 255, 0.25) !important;
+	color: #ffffff !important;
+	border-radius: 4px !important;
+}
+
+#V-PopupsCompose > header .btn:hover {
+	background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Compose To/CC/BCC fields area */
+#V-PopupsCompose .b-header {
+	background: #1f1f1f !important;
+	border-bottom: 1px solid #333333 !important;
+	padding: 12px !important;
+}
+
+#V-PopupsCompose .b-header td:first-child {
+	color: #a0a0a0 !important;
+	font-size: 13px !important;
+	font-weight: 500 !important;
+}
+
+#V-PopupsCompose .b-header input[type="text"] {
+	border: 1px solid #4d4d4d !important;
+	border-radius: 4px !important;
+	padding: 6px 10px !important;
+	font-size: 14px !important;
+	background: #1a1a1a !important;
+	color: #e4e4e4 !important;
+}
+
+#V-PopupsCompose .b-header input[type="text"]:focus {
+	border-color: #62abf5 !important;
+}
+
+/* Compose tabs */
+#V-PopupsCompose .tabs > label {
+	font-size: 13px !important;
+	font-weight: 500 !important;
+	padding: 8px 16px !important;
+	color: #a0a0a0 !important;
+}
+
+/* Compose text area */
+#V-PopupsCompose .textAreaParent {
+	border: none !important;
+}
+
+/* Compose footer */
+#V-PopupsCompose > footer {
+	background: #1f1f1f !important;
+	border-top: 1px solid #333333 !important;
+	padding: 10px 16px !important;
+}
+
+/* Send button */
+#V-PopupsCompose .btn.btn-success {
+	background: #2b6cb0 !important;
+	border-color: #2b6cb0 !important;
+	color: #ffffff !important;
+	padding: 8px 20px !important;
+	font-weight: 600 !important;
+	border-radius: 4px !important;
+}
+
+#V-PopupsCompose .btn.btn-success:hover {
+	background: #3578b8 !important;
+}
+
+/* Attachment area */
+#V-PopupsCompose .attachmentAreaParent {
+	border-top-color: #333333 !important;
+}
+
+#V-PopupsCompose .b-attachment-place {
+	border-color: #4d4d4d !important;
+	border-radius: 8px !important;
+	background: #1f1f1f !important;
+}
+
+
+/* ==========================================================
+   ALL DIALOG/POPUP MODERNIZATION
+   ========================================================== */
+
+dialog > header {
+	padding: 12px 16px !important;
+	border-bottom: 1px solid #333333 !important;
+	background: #1f1f1f !important;
+}
+
+dialog > header h3 {
+	font-size: 16px !important;
+	font-weight: 600 !important;
+	margin: 0 !important;
+}
+
+dialog .modal-body {
+	padding: 16px !important;
+}
+
+dialog > footer {
+	padding: 10px 16px !important;
+	border-top: 1px solid #333333 !important;
+	background: #1f1f1f !important;
 }
