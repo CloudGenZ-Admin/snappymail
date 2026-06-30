@@ -23,9 +23,11 @@ jobs:
           mkdir release
           tar -xzf snappymail-*.tar.gz -C release
 
-      - name: Apply theme customizations
+      - name: Remove old themes and apply custom ones
         run: |
-          # Copy themes into the release (these are in the correct path)
+          # Remove all default themes from the release
+          rm -rf release/snappymail/v/${SNAPPYMAIL_VERSION}/themes/*
+          # Copy our custom themes
           cp -r custom/my-overrides/snappymail/* release/snappymail/ 2>/dev/null || true
 
       - name: Apply plugin customizations

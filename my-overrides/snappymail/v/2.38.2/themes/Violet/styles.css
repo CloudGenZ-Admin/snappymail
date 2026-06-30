@@ -1,0 +1,755 @@
+/*
+ * Outlook Modern Light Theme for SnappyMail
+ * Clean, professional Fluent UI 2 design
+ */
+
+:root {
+	color-scheme: light;
+
+	/* CORE PALETTE */
+	--main-color: #242424;
+	--main-bg-color: #f5f5f5;
+	--main-bg-image: none;
+	--main-bg-size: auto;
+	--main-bg-repeat: no-repeat;
+	--main-font-size: 14px;
+	--link-color: #7c3aed;
+	--border-color: #e0e0e0;
+	--border-radius: 6px;
+	--hr-color: #e8e8e8;
+
+	--panel-bg-clr: #ffffff;
+
+	--warning-clr: #8a6914;
+	--warning-bg-clr: #fef7e0;
+	--warning-border-clr: #fce100;
+	--error-clr: #b10e1c;
+	--error-bg-clr: #fdf3f4;
+	--error-border-clr: #eeacb2;
+	--info-clr: #7c3aed;
+	--info-bg-clr: #f3e8ff;
+	--info-border-clr: #b4d6fa;
+
+	/* LOADING */
+	--loading-color: #7c3aed;
+	--loading-text-shadow: none;
+
+	/* LOGIN */
+	--login-color: #242424;
+	--login-bg-color: #ffffff;
+	--login-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.12);
+	--login-border: 1px solid #e8e8e8;
+	--login-border-radius: 8px;
+
+	--spinner-color: #7c3aed;
+
+	/* MENU */
+	--dropdown-menu-color: #242424;
+	--dropdown-menu-bg-color: #ffffff;
+	--dropdown-menu-hover-bg-color: #f5f5f5;
+	--dropdown-menu-hover-color: #242424;
+	--dropdown-menu-disabled-color: #bdbdbd;
+	--dropdown-menu-border-clr: #e0e0e0;
+
+	/* FOLDERS */
+	--folders-color: #424242;
+	--folders-disabled-color: #bdbdbd;
+	--folders-selected-color: #7c3aed;
+	--folders-selected-bg-color: #f3e8ff;
+	--folders-focused-color: #7c3aed;
+	--folders-focused-bg-color: #e1f0ff;
+	--folders-hover-color: #242424;
+	--folders-hover-bg-color: #f5f5f5;
+	--folders-drop-color: #7c3aed;
+	--folders-drop-bg-color: #f3e8ff;
+	--unread-count-color: #ffffff;
+	--unread-count-bg-color: #7c3aed;
+
+	/* SETTINGS */
+	--settings-menu-color: #424242;
+	--settings-menu-selected-color: #7c3aed;
+	--settings-menu-selected-bg-color: #f3e8ff;
+	--settings-menu-hover-color: #242424;
+	--settings-menu-hover-bg-color: #f5f5f5;
+
+	/* MESSAGES */
+	--message-list-toolbar-bg-color: #ffffff;
+	--message-header-bg-clr: #faf5ff;
+
+	/* DIALOGS */
+	--dialog-clr: #242424;
+	--dialog-bg-clr: #ffffff;
+	--dialog-border-clr: #e0e0e0;
+	--dialog-border-radius: 8px;
+
+	/* FORMS */
+	--btn-clr: #ffffff;
+	--btn-bg-clr: #7c3aed;
+	--btn-border-clr: #7c3aed;
+	--btn-border-radius: 4px;
+	--btn-success-bg-clr: #0f7b0f;
+	--btn-danger-bg-clr: #b10e1c;
+
+	--input-clr: #242424;
+	--input-bg-clr: #ffffff;
+	--input-border-clr: #d1d1d1;
+	--input-border-radius: 4px;
+	--input-focus-border-clr: #7c3aed;
+
+	/* TABLES */
+	--tr-hover-bg-clr: #f5f5f5;
+	--tr-odd-bg-clr: #faf5ff;
+
+	/* TABS */
+	--tab-active-bg-clr: #ffffff;
+	--tab-hover-border-clr: #7c3aed;
+
+	--smDialogShrink: 20px;
+	--smMainShadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+
+/* ==========================================================
+   GLOBAL
+   ========================================================== */
+
+#rl-app {
+	font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif !important;
+	-webkit-font-smoothing: antialiased;
+}
+
+#rl-content:not([hidden]) {
+	background: #f5f5f5;
+}
+
+
+/* ==========================================================
+   LOGIN PAGE - CLEAN ELEVATED CARD
+   ========================================================== */
+
+/* Full page background for login */
+html, body, #rl-app {
+	background-color: #f5f5f5 !important;
+	background-image: none !important;
+}
+
+/* The login card container */
+#V-Login, #V-AdminLogin {
+	max-width: 440px !important;
+}
+
+.LoginView form {
+	background: #ffffff !important;
+	border: 1px solid #e0e0e0 !important;
+	border-radius: 8px !important;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+	padding: 44px 40px 36px !important;
+	color: #242424 !important;
+}
+
+.LoginView form * {
+	color: #242424 !important;
+}
+
+.LoginView form .controls.error * {
+	color: #b10e1c !important;
+	border-color: #b10e1c !important;
+}
+
+.LoginView .controls {
+	margin-bottom: 20px !important;
+}
+
+.LoginView input {
+	background: #ffffff !important;
+	border: 1px solid #d1d1d1 !important;
+	border-bottom: 2px solid #d1d1d1 !important;
+	border-radius: 4px !important;
+	color: #242424 !important;
+	font-size: 15px !important;
+	height: 40px !important;
+	padding: 0 12px 0 38px !important;
+	transition: border-color 0.15s ease !important;
+	width: 100% !important;
+	box-sizing: border-box !important;
+}
+
+.LoginView input::placeholder {
+	color: #9e9e9e !important;
+}
+
+.LoginView input:focus {
+	border-bottom-color: #7c3aed !important;
+	outline: none !important;
+}
+
+.LoginView input:hover {
+	border-color: #b0b0b0 !important;
+}
+
+.LoginView .controls > .fontastic:first-child {
+	font-size: 16px !important;
+	color: #616161 !important;
+	left: 10px !important;
+	line-height: 40px !important;
+}
+
+.LoginView .buttonLogin {
+	background: #7c3aed !important;
+	border: none !important;
+	border-radius: 4px !important;
+	color: #ffffff !important;
+	font-size: 15px !important;
+	font-weight: 600 !important;
+	height: 40px !important;
+	text-transform: none !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+	cursor: pointer !important;
+	width: 100% !important;
+	margin-top: 8px !important;
+}
+
+.LoginView .buttonLogin:hover {
+	background: #6d28d9 !important;
+}
+
+.LoginView .e-checkbox {
+	font-size: 13px !important;
+}
+
+.LoginView .language-button {
+	opacity: 0.5 !important;
+}
+.LoginView .language-button:hover {
+	opacity: 1 !important;
+}
+
+.LoginView .alert {
+	background: #fdf3f4 !important;
+	border: 1px solid #eeacb2 !important;
+	border-radius: 4px !important;
+	padding: 10px 14px !important;
+}
+.LoginView .alert * {
+	color: #b10e1c !important;
+}
+
+.LoginView form.submitting::after {
+	border-width: 3px !important;
+	border-color: transparent !important;
+	border-top-color: #7c3aed !important;
+}
+
+
+/* ==========================================================
+   SIDEBAR
+   ========================================================== */
+
+#rl-left {
+	background: #faf5ff !important;
+	border-right: 1px solid #e8e8e8 !important;
+}
+
+/* Logo in sidebar */
+#V-MailFolderList .b-folders::before {
+	content: '';
+	display: block;
+	background: url('https://cloudgenz.com/assets/img/favicon.png') no-repeat center;
+	background-size: contain;
+	height: 32px;
+	margin: 12px 16px 8px;
+}
+
+#rl-left .b-toolbar {
+	padding: 8px 8px !important;
+}
+
+/* FIX: Compose button text cutoff - override max-height */
+#rl-left .buttonCompose {
+	max-height: none !important;
+	max-width: none !important;
+	overflow: visible !important;
+	text-overflow: unset !important;
+	height: auto !important;
+	width: auto !important;
+	padding: 6px 14px !important;
+	border-radius: 4px !important;
+	background: #7c3aed !important;
+	border: none !important;
+	color: #ffffff !important;
+	font-weight: 600 !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+	white-space: nowrap !important;
+}
+
+#rl-left .buttonCompose:hover {
+	background: #6d28d9 !important;
+}
+
+.b-folders li a {
+	border-radius: 4px !important;
+	margin: 1px 6px !important;
+	padding: 6px 10px !important;
+	border-left: none !important;
+	line-height: 1.8em !important;
+}
+
+.b-folders li a.selectable:hover {
+	background-color: #f0f0f0 !important;
+}
+
+.b-folders li a.selectable.selected {
+	background-color: #f3e8ff !important;
+	color: #7c3aed !important;
+	font-weight: 600 !important;
+}
+
+/* Unread badge */
+.b-folders .b-folders-system a[data-unread]::after,
+.b-folders .b-folders-user a[data-unread]:not(.system)::after {
+	background-color: #7c3aed !important;
+	color: #ffffff !important;
+	font-size: 11px !important;
+	font-weight: 600 !important;
+	min-width: 18px !important;
+	height: 18px !important;
+	line-height: 18px !important;
+	border-radius: 9px !important;
+	padding: 0 5px !important;
+	text-shadow: none !important;
+}
+
+
+/* ==========================================================
+   MESSAGE LIST & TOOLBAR
+   ========================================================== */
+
+.messageList .second-toolbar {
+	background: #ffffff !important;
+	border-bottom: 1px solid #e8e8e8 !important;
+	border-radius: 6px 6px 0 0 !important;
+	padding: 8px !important;
+}
+
+.messageList {
+	border: 1px solid #e0e0e0 !important;
+	border-radius: 6px !important;
+	box-shadow: none !important;
+}
+
+.messageListItem {
+	border-bottom: 1px solid #f0f0f0 !important;
+	border-left: 4px solid transparent !important;
+	transition: background-color 0.1s !important;
+}
+
+.messageListItem:hover {
+	background-color: #f9f9f9 !important;
+}
+
+.messageListItem.focused,
+.messageListItem.selected,
+.messageListItem.checked {
+	background-color: #f3e8ff !important;
+	border-left-color: #7c3aed !important;
+}
+
+.messageListItem.unseen {
+	font-weight: 600 !important;
+	border-left-color: #7c3aed !important;
+}
+
+.messageList .b-footer {
+	background: #faf5ff !important;
+	border-top: 1px solid #e8e8e8 !important;
+	border-radius: 0 0 6px 6px !important;
+}
+
+
+/* ==========================================================
+   BUTTONS - FIX TEXT CUTOFF
+   ========================================================== */
+
+.btn {
+	border-radius: 4px !important;
+	font-weight: 500 !important;
+	text-transform: none !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+}
+
+.btn:not(.btn-success):not(.btn-warning):not(.btn-danger) {
+	background: #ffffff !important;
+	color: #242424 !important;
+	border: 1px solid #d1d1d1 !important;
+}
+
+.btn:not(.btn-success):not(.btn-warning):not(.btn-danger):hover {
+	background: #f5f5f5 !important;
+	border-color: #c7c7c7 !important;
+}
+
+.btn.btn-transparent {
+	background: transparent !important;
+	border-color: transparent !important;
+	opacity: 0.7 !important;
+}
+
+.btn.btn-transparent:hover {
+	background: #f0f0f0 !important;
+	opacity: 1 !important;
+}
+
+.btn.btn-success {
+	background: #7c3aed !important;
+	border-color: #7c3aed !important;
+	color: #ffffff !important;
+}
+.btn.btn-success:hover {
+	background: #6d28d9 !important;
+}
+
+
+/* ==========================================================
+   DROPDOWN MENUS
+   ========================================================== */
+
+.dropdown-menu {
+	background: #ffffff !important;
+	border: 1px solid #e0e0e0 !important;
+	border-radius: 6px !important;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+	padding: 4px !important;
+}
+
+.dropdown-menu a,
+.dropdown-menu li a {
+	border-radius: 3px !important;
+	padding: 7px 12px !important;
+	font-size: 13px !important;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu li a:hover {
+	background-color: #f5f5f5 !important;
+}
+
+.dropdown-menu * + .dividerbar {
+	margin: 4px 0 !important;
+	padding: 0 !important;
+	border-top: 1px solid #f0f0f0 !important;
+}
+
+
+/* ==========================================================
+   MESSAGE VIEW - FIX REPLY/MENU BUTTON POSITION
+   ========================================================== */
+
+#V-MailMessageView {
+	border-left: 1px solid #e8e8e8 !important;
+}
+
+.messageView {
+	border: 1px solid #e0e0e0 !important;
+	border-radius: 6px !important;
+}
+
+/* Fix: Reply/menu buttons toolbar positioning */
+.messageView .message-fixed-button-toolbar {
+	position: absolute !important;
+	top: 33px !important;
+	right: 10px !important;
+	z-index: 100 !important;
+	display: flex !important;
+	gap: 2px !important;
+	flex-wrap: nowrap !important;
+}
+
+.messageView .message-fixed-button-toolbar .btn {
+	padding: 4px 8px !important;
+	font-size: 13px !important;
+	white-space: nowrap !important;
+	overflow: visible !important;
+}
+
+/* Ensure the message header has enough space for the buttons */
+.messageView .messageItemHeader .subjectParent {
+	padding-right: 120px !important;
+}
+
+/* Message header */
+.messageView .messageItemHeader {
+	background: #faf5ff !important;
+	border-bottom: 1px solid #e8e8e8 !important;
+	padding: 12px !important;
+	position: relative !important;
+}
+
+
+/* ==========================================================
+   INPUT FIELDS
+   ========================================================== */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea,
+select,
+.select {
+	border: 1px solid #d1d1d1 !important;
+	border-radius: 4px !important;
+	outline: none !important;
+	transition: border-color 0.15s ease !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+textarea:focus {
+	border-color: #7c3aed !important;
+}
+
+select, .select {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23616161' d='M2.5 4.5L6 8l3.5-3.5h-7z'/%3E%3C/svg%3E") !important;
+	background-repeat: no-repeat !important;
+	background-position: right 10px center !important;
+	appearance: none !important;
+}
+
+
+/* ==========================================================
+   TABS
+   ========================================================== */
+
+.tabs > label {
+	border: none !important;
+	border-bottom: 2px solid transparent !important;
+	border-radius: 0 !important;
+	opacity: 0.7 !important;
+	padding: 8px 14px !important;
+}
+
+.tabs > label:hover {
+	opacity: 1 !important;
+}
+
+.tabs > [id^="tab"]:checked + label {
+	background: transparent !important;
+	border-bottom: 2px solid #7c3aed !important;
+	color: #7c3aed !important;
+	opacity: 1 !important;
+}
+
+
+/* ==========================================================
+   DIALOGS
+   ========================================================== */
+
+dialog {
+	border: 1px solid #e0e0e0 !important;
+	border-radius: 8px !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+}
+
+dialog::backdrop {
+	background: rgba(0, 0, 0, 0.4) !important;
+}
+
+
+/* ==========================================================
+   SCROLLBARS
+   ========================================================== */
+
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: #d1d1d1;
+	border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #a0a0a0;
+}
+
+
+/* ==========================================================
+   SYSTEM DROPDOWN
+   ========================================================== */
+
+#V-SystemDropDown .accountPlace {
+	border-right-color: #e0e0e0 !important;
+}
+
+
+/* ==========================================================
+   MISC
+   ========================================================== */
+
+/* Fix: Hide browser native clear button on search inputs (app has its own) */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none !important;
+	appearance: none !important;
+	display: none !important;
+}
+
+#V-Settings-About .rl-logo {
+	opacity: 0.7;
+}
+
+.icon-spinner {
+	border-color: #e0e0e0 !important;
+	border-top-color: #7c3aed !important;
+}
+
+
+/* ==========================================================
+   COMPOSE POPUP - MODERN DESIGN
+   ========================================================== */
+
+#V-PopupsCompose {
+	border-radius: 8px !important;
+	border: 1px solid #e0e0e0 !important;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+	overflow: hidden !important;
+}
+
+/* Compose header bar */
+#V-PopupsCompose > header {
+	background: #7c3aed !important;
+	color: #ffffff !important;
+	padding: 10px 16px !important;
+	border-bottom: none !important;
+}
+
+#V-PopupsCompose > header * {
+	color: #ffffff !important;
+}
+
+#V-PopupsCompose > header .close,
+#V-PopupsCompose > header .minimize-custom {
+	border-color: rgba(255, 255, 255, 0.6) !important;
+	opacity: 0.8 !important;
+}
+
+#V-PopupsCompose > header .close:hover,
+#V-PopupsCompose > header .minimize-custom:hover {
+	opacity: 1 !important;
+}
+
+#V-PopupsCompose > header .btn {
+	background: rgba(255, 255, 255, 0.15) !important;
+	border: 1px solid rgba(255, 255, 255, 0.3) !important;
+	color: #ffffff !important;
+	border-radius: 4px !important;
+}
+
+#V-PopupsCompose > header .btn:hover {
+	background: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Compose To/CC/BCC fields area */
+#V-PopupsCompose .b-header {
+	background: #faf5ff !important;
+	border-bottom: 1px solid #e8e8e8 !important;
+	padding: 12px !important;
+}
+
+#V-PopupsCompose .b-header td:first-child {
+	color: #616161 !important;
+	font-size: 13px !important;
+	font-weight: 500 !important;
+}
+
+#V-PopupsCompose .b-header input[type="text"] {
+	border: 1px solid #d1d1d1 !important;
+	border-radius: 4px !important;
+	padding: 6px 10px !important;
+	font-size: 14px !important;
+	background: #ffffff !important;
+}
+
+#V-PopupsCompose .b-header input[type="text"]:focus {
+	border-color: #7c3aed !important;
+}
+
+/* Compose tabs (message/attachments) */
+#V-PopupsCompose .tabs > label {
+	font-size: 13px !important;
+	font-weight: 500 !important;
+	padding: 8px 16px !important;
+}
+
+/* Compose text area */
+#V-PopupsCompose .textAreaParent {
+	border: none !important;
+}
+
+/* Compose footer */
+#V-PopupsCompose > footer {
+	background: #faf5ff !important;
+	border-top: 1px solid #e8e8e8 !important;
+	padding: 10px 16px !important;
+}
+
+/* Send button in compose */
+#V-PopupsCompose .btn.btn-success {
+	background: #7c3aed !important;
+	border-color: #7c3aed !important;
+	color: #ffffff !important;
+	padding: 8px 20px !important;
+	font-weight: 600 !important;
+	border-radius: 4px !important;
+}
+
+#V-PopupsCompose .btn.btn-success:hover {
+	background: #6d28d9 !important;
+}
+
+/* Attachment area */
+#V-PopupsCompose .attachmentAreaParent {
+	border-top-color: #e8e8e8 !important;
+}
+
+#V-PopupsCompose .b-attachment-place {
+	border-color: #d1d1d1 !important;
+	border-radius: 8px !important;
+	background: #faf5ff !important;
+}
+
+
+/* ==========================================================
+   ALL DIALOG/POPUP MODERNIZATION
+   ========================================================== */
+
+/* Generic dialog header */
+dialog > header {
+	padding: 12px 16px !important;
+	border-bottom: 1px solid #e8e8e8 !important;
+	background: #faf5ff !important;
+}
+
+dialog > header h3 {
+	font-size: 16px !important;
+	font-weight: 600 !important;
+	margin: 0 !important;
+}
+
+/* Dialog body */
+dialog .modal-body {
+	padding: 16px !important;
+}
+
+/* Dialog footer */
+dialog > footer {
+	padding: 10px 16px !important;
+	border-top: 1px solid #e8e8e8 !important;
+	background: #faf5ff !important;
+}
