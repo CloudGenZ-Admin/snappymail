@@ -38,7 +38,9 @@ jobs:
         run: |
           lftp -c "
             set sftp:connect-program 'ssh -o StrictHostKeyChecking=no';
-            open -u ${{ secrets.NEW_FTP_USER }},${{ secrets.NEW_FTP_PASS }} sftp://${{ secrets.NEW_FTP_HOST }};
+            set net:max-retries 3;
+            open sftp://${{ secrets.NEW_FTP_HOST }};
+            user ${{ secrets.NEW_FTP_USER }} '${{ secrets.NEW_FTP_PASS }}';
             mirror --reverse --verbose ./migrated-data/ /var/data/snappymail/;
             quit
           "
@@ -139,7 +141,9 @@ jobs:
         run: |
           lftp -c "
             set sftp:connect-program 'ssh -o StrictHostKeyChecking=no';
-            open -u ${{ secrets.NEW_FTP_USER }},${{ secrets.NEW_FTP_PASS }} sftp://${{ secrets.NEW_FTP_HOST }};
+            set net:max-retries 3;
+            open sftp://${{ secrets.NEW_FTP_HOST }};
+            user ${{ secrets.NEW_FTP_USER }} '${{ secrets.NEW_FTP_PASS }}';
             mirror --reverse --verbose --delete ./release/ /var/www/snappymail/;
             quit
           "
