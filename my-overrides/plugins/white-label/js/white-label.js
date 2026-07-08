@@ -2,10 +2,14 @@
  * White-Label Branding Plugin
  * Sets title, favicon, loading message, logo, and brand colors from server config.
  * Dynamically switches branding on the login page as the user types their email.
+ * On login page: no branding shown until email domain matches a client.
  */
 (rl => {
 	'use strict';
 	if (!rl) return;
+
+	const originalTitle = document.title;
+	const originalFavicons = [];
 
 	function getConfig() {
 		try { return rl.settings && rl.settings.get('WhiteLabel'); }
@@ -36,6 +40,13 @@
 		return null;
 	}
 
+	function saveOriginalFavicons() {
+		if (originalFavicons.length) return;
+		document.querySelectorAll("link[rel*='icon']").forEach(link => {
+			originalFavicons.push({ el: link, href: link.href });
+		});
+	}
+
 	function applyColors(config) {
 		if (!config) return;
 		const root = document.documentElement;
@@ -48,6 +59,13 @@
 		}
 	}
 
+	function clearColors() {
+		const root = document.documentElement;
+		root.style.removeProperty('--wl-primary-color');
+		root.style.removeProperty('--wl-primary-button');
+		root.style.removeProperty('--wl-accent-color');
+	}
+
 	function applyTitle(config) {
 		if (!config) return;
 		if (config.title) {
@@ -55,6 +73,10 @@
 		} else if (config.companyName) {
 			document.title = config.companyName;
 		}
+	}
+
+	function resetTitle() {
+		document.title = 'Webmail';
 	}
 
 	function applyFavicon(config) {
@@ -66,10 +88,10 @@
 		if (apple) apple.href = config.faviconUrl;
 	}
 
-	function applyLoadingMessage(config) {
-		if (!config || !config.loadingMessage) return;
-		const el = document.getElementById('rl-loading-desc');
-		if (el) el.textContent = config.loadingMessage;
+	function resetFavicon() {
+		originalFavicons.forEach(item => {
+			item.el.href = item.href;
+		});
 	}
 
 	function applyLoginBranding(config) {
@@ -95,18 +117,44 @@
 		if (html) brandEl.innerHTML = html;
 	}
 
+	function clearLoginBranding() {
+		const brandEl = document.getElementById('wl-branding');
+		if (brandEl) brandEl.innerHTML = '';
+	}
+
+	function applyAppBranding(config) {
+		if (!config) return;
+		const root = document.documentElement;
+
+		if (config.companyName) {
+			root.style.setProperty('--wl-company-name', "'" + config.companyName + "'");
+		}
+		if (config.logoUrl) {
+			root.style.setProperty('--wl-logo-bg', "url('" + config.logoUrl + "') no-repeat left center");
+		}
+	}
+
 	function applyAll(config) {
 		if (!config) return;
 		applyColors(config);
 		applyTitle(config);
 		applyFavicon(config);
+		applyAppBranding(config);
 	}
 
-	function applyFullBranding(config) {
+	function applyFullLoginBranding(config) {
 		if (!config) return;
-		applyAll(config);
+		applyColors(config);
+		applyTitle(config);
+		applyFavicon(config);
 		applyLoginBranding(config);
-		applyLoadingMessage(config);
+	}
+
+	function clearFullLoginBranding() {
+		clearColors();
+		resetTitle();
+		resetFavicon();
+		clearLoginBranding();
 	}
 
 	// Watch email input on login page and switch branding dynamically
@@ -126,29 +174,26 @@
 
 			const matchedClient = findClientByEmail(value);
 			if (matchedClient) {
-				applyFullBranding(matchedClient);
+				applyFullLoginBranding(matchedClient);
 			} else {
-				// Revert to default (domain-based) config
-				const defaultConfig = getConfig();
-				if (defaultConfig) applyFullBranding(defaultConfig);
+				// No match — clear all branding
+				clearFullLoginBranding();
 			}
 		});
 	}
 
-	// On login page
+	// On login page — don't apply any branding by default, just watch for input
 	addEventListener('rl-view-model', e => {
 		const id = e.detail && e.detail.viewModelTemplateID;
 		if ('Login' === id || 'AdminLogin' === id) {
-			const config = getConfig();
-			if (config) {
-				applyFullBranding(config);
-			}
+			saveOriginalFavicons();
+			resetTitle();
 			// Start watching email input for dynamic branding
 			setTimeout(watchEmailInput, 100);
 		}
 	});
 
-	// On main screen
+	// On main screen (after login)
 	addEventListener('sm-show-screen', () => {
 		const config = getConfig();
 		if (config) applyAll(config);

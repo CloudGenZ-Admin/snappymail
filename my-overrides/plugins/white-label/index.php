@@ -156,10 +156,12 @@ class WhiteLabelPlugin extends \RainLoop\Plugins\AbstractPlugin
 
 	public function adjustCSP(\SnappyMail\HTTP\CSP $oCSP): void
 	{
-		$client = $this->detectClient();
-		if ($client) {
+		// Allow image loading from all client domains (needed for dynamic branding)
+		$clients = $this->getClientsConfig();
+		foreach ($clients as $clientId => $config) {
+			if (!is_array($config)) continue;
 			foreach (['logo_url', 'favicon_url'] as $key) {
-				$url = $client[$key] ?? '';
+				$url = $config[$key] ?? '';
 				if ($url && \preg_match('#^https?://([^/]+)#', $url, $m)) {
 					$oCSP->add('img-src', 'https://' . $m[1]);
 				}
