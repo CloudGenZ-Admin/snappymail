@@ -191,6 +191,11 @@
 			// Start watching email input for dynamic branding
 			setTimeout(watchEmailInput, 100);
 		}
+		// Apply branding when main mailbox view loads
+		if ('MailFolderList' === id || 'MailMessageList' === id) {
+			const config = getConfig();
+			if (config) applyAll(config);
+		}
 	});
 
 	// On main screen (after login)
@@ -206,7 +211,29 @@
 				const config = getConfig();
 				if (config) applyAll(config);
 			}, 300);
+			// Retry a few times in case DOM isn't ready
+			setTimeout(() => {
+				const config = getConfig();
+				if (config) applyAll(config);
+			}, 1000);
+			setTimeout(() => {
+				const config = getConfig();
+				if (config) applyAll(config);
+			}, 2000);
 		}
 	});
+
+	// Fallback: watch for the folder list to appear in DOM
+	const observer = new MutationObserver(() => {
+		const folderList = document.querySelector('#V-MailFolderList .b-folders');
+		if (folderList) {
+			const config = getConfig();
+			if (config) {
+				applyAll(config);
+				observer.disconnect();
+			}
+		}
+	});
+	observer.observe(document.body, { childList: true, subtree: true });
 
 })(window.rl);
