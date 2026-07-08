@@ -1,15 +1,53 @@
-name: Deploy SnappyMail to Hostinger
+name: Deploy SnappyMail to VPS
 
 on:
   push:
     branches: [master]
   workflow_dispatch:
+    inputs:
+      migrate_data:
+        description: 'Migrate data from old Hostinger (one-time)'
+        required: false
+        type: boolean
+        default: false
 
 env:
   SNAPPYMAIL_VERSION: "2.38.2"
+  DATA_PATH: "/var/data/snappymail"
 
 jobs:
+  migrate:
+    if: ${{ github.event.inputs.migrate_data == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install lftp
+        run: sudo apt-get install -y lftp
+
+      - name: Download data from old Hostinger
+        run: |
+          mkdir -p migrated-data
+          lftp -c "
+            set ftp:ssl-allow no;
+            open -u ${{ secrets.FTP_USER }},${{ secrets.FTP_PASS }} ${{ secrets.FTP_HOST }};
+            mirror --verbose /home/u930449354/snappymail-data ./migrated-data/;
+            quit
+          "
+          echo "Downloaded $(find migrated-data -type f | wc -l) files from old instance"
+
+      - name: Upload data to new VPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.NEW_FTP_HOST }}
+          username: ${{ secrets.NEW_FTP_USER }}
+          password: ${{ secrets.NEW_FTP_PASS }}
+          protocol: sftp
+          server-dir: /var/data/snappymail/
+          local-dir: ./migrated-data/
+          dangerous-clean-slate: false
+
   deploy:
+    needs: migrate
+    if: always() && (needs.migrate.result == 'success' || needs.migrate.result == 'skipped')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout customizations
@@ -37,11 +75,7 @@ jobs:
         run: |
           cat > release/setup-plugins.php << 'PHPEOF'
           <?php
-          // Plugin installer - copies plugins to the data directory and clears cache.
-          // Visit: https://mail.cloudgenz.com/setup-plugins.php
-          // Safe to leave deployed; only runs when accessed directly.
-
-          $dataPath = '/home/u930449354/snappymail-data/_data_/_default_/plugins/';
+          $dataPath = '/var/data/snappymail/_data_/_default_/plugins/';
           $sourcePath = __DIR__ . '/_plugins_source/';
 
           if (!is_dir($sourcePath)) {
@@ -66,8 +100,7 @@ jobs:
 
           copyDir($sourcePath, $dataPath);
 
-          // Clear CSS cache
-          $cachePath = '/home/u930449354/snappymail-data/_data_/_default_/cache/';
+          $cachePath = '/var/data/snappymail/_data_/_default_/cache/';
           if (is_dir($cachePath)) {
               $iter = new RecursiveIteratorIterator(
                   new RecursiveDirectoryIterator($cachePath, FilesystemIterator::SKIP_DOTS),
@@ -95,17 +128,18 @@ jobs:
         run: |
           cat > release/include.php << 'EOF'
           <?php
-          define('APP_DATA_FOLDER_PATH', '/home/u930449354/snappymail-data/');
+          define('APP_DATA_FOLDER_PATH', '/var/data/snappymail/');
           EOF
 
       - name: Remove data folder from deploy
         run: rm -rf release/data
 
-      - name: Deploy via FTP
+      - name: Deploy via SFTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
-          server-dir: /public_html/
+          server: ${{ secrets.NEW_FTP_HOST }}
+          username: ${{ secrets.NEW_FTP_USER }}
+          password: ${{ secrets.NEW_FTP_PASS }}
+          protocol: sftp
+          server-dir: /var/www/snappymail/
           local-dir: ./release/
