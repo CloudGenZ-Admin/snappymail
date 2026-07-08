@@ -1,6 +1,7 @@
 /**
  * White-Label Branding Plugin
- * Sets title, favicon, loading message, logo, and brand colors from server config
+ * Sets title, favicon, loading message, logo, and brand colors from server config.
+ * Dynamically switches branding on the login page as the user types their email.
  */
 (rl => {
 	'use strict';
@@ -9,6 +10,30 @@
 	function getConfig() {
 		try { return rl.settings && rl.settings.get('WhiteLabel'); }
 		catch(e) { return null; }
+	}
+
+	function getAllClients() {
+		try { return rl.settings && rl.settings.get('WhiteLabelClients'); }
+		catch(e) { return null; }
+	}
+
+	function findClientByEmail(email) {
+		const clients = getAllClients();
+		if (!clients || !email) return null;
+
+		const parts = email.split('@');
+		const domain = parts[1] ? parts[1].toLowerCase() : '';
+		if (!domain) return null;
+
+		for (const [id, config] of Object.entries(clients)) {
+			const emailDomains = config.emailDomains || [];
+			for (const ed of emailDomains) {
+				if (ed.toLowerCase() === domain) {
+					return config;
+				}
+			}
+		}
+		return null;
 	}
 
 	function applyColors(config) {
@@ -34,11 +59,9 @@
 
 	function applyFavicon(config) {
 		if (!config || !config.faviconUrl) return;
-		// Update all favicon links
 		document.querySelectorAll("link[rel*='icon']").forEach(link => {
 			link.href = config.faviconUrl;
 		});
-		// Also set apple-touch-icon
 		const apple = document.querySelector("link[rel='apple-touch-icon']");
 		if (apple) apple.href = config.faviconUrl;
 	}
@@ -54,7 +77,6 @@
 		const loginView = document.querySelector('#V-Login') || document.querySelector('#V-AdminLogin');
 		if (!loginView) return;
 
-		// Insert branding above the form
 		let brandEl = document.getElementById('wl-branding');
 		if (!brandEl) {
 			brandEl = document.createElement('div');
@@ -80,16 +102,49 @@
 		applyFavicon(config);
 	}
 
+	function applyFullBranding(config) {
+		if (!config) return;
+		applyAll(config);
+		applyLoginBranding(config);
+		applyLoadingMessage(config);
+	}
+
+	// Watch email input on login page and switch branding dynamically
+	function watchEmailInput() {
+		const emailInput = document.querySelector('#V-Login input[type="email"], #V-Login input[name="Email"], #V-Login input[autocomplete="username"]');
+		if (!emailInput) return;
+
+		let lastDomain = '';
+
+		emailInput.addEventListener('input', function() {
+			const value = emailInput.value || '';
+			const parts = value.split('@');
+			const domain = parts[1] ? parts[1].toLowerCase() : '';
+
+			if (domain === lastDomain) return;
+			lastDomain = domain;
+
+			const matchedClient = findClientByEmail(value);
+			if (matchedClient) {
+				applyFullBranding(matchedClient);
+			} else {
+				// Revert to default (domain-based) config
+				const defaultConfig = getConfig();
+				if (defaultConfig) applyFullBranding(defaultConfig);
+			}
+		});
+	}
+
 	// On login page
 	addEventListener('rl-view-model', e => {
 		const id = e.detail && e.detail.viewModelTemplateID;
 		if ('Login' === id || 'AdminLogin' === id) {
 			const config = getConfig();
 			if (config) {
-				applyAll(config);
-				applyLoginBranding(config);
-				applyLoadingMessage(config);
+				applyFullBranding(config);
 			}
+			// Start watching email input for dynamic branding
+			setTimeout(watchEmailInput, 100);
 		}
 	});
 

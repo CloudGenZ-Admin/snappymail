@@ -10,5 +10,17 @@
 		"accent_color": "#13a456",
 		"domains": ["mail.cloudgenz.com"],
 		"email_domains": ["cloudgenz.com"]
+	},
+	"unitedinpride": {
+		"company_name": "UnitedInPride",
+		"title": "UnitedInPride Mail",
+		"logo_url": "https://www.unitedinpride.ca/assets/updatelogo-DF5B8Nis.png",
+		"logo_width": "48px",
+		"favicon_url": "https://www.unitedinpride.ca/assets/updatelogo-DF5B8Nis.png",
+		"loading_message": "Loading UnitedInPride Mail...",
+		"primary_color": "#e91e63",
+		"accent_color": "#c2185b",
+		"domains": ["unitedinpride.mail.cloudgenz.com"],
+		"email_domains": ["unitedinpride.ca"]
 	}
 }

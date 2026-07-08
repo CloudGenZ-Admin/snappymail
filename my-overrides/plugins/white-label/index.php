@@ -132,6 +132,26 @@ class WhiteLabelPlugin extends \RainLoop\Plugins\AbstractPlugin
 				'accentColor'    => $client['accent_color'] ?? '#13a456',
 			];
 		}
+
+		// Pass all clients for dynamic login branding
+		if (!$bAdmin) {
+			$allClients = [];
+			foreach ($this->getClientsConfig() as $id => $config) {
+				if (!is_array($config)) continue;
+				$allClients[$id] = [
+					'companyName'    => $config['company_name'] ?? '',
+					'title'          => $config['title'] ?? ($config['company_name'] ?? ''),
+					'logoUrl'        => $config['logo_url'] ?? '',
+					'logoWidth'      => $config['logo_width'] ?? '180px',
+					'faviconUrl'     => $config['favicon_url'] ?? '',
+					'loadingMessage' => $config['loading_message'] ?? '',
+					'primaryColor'   => $config['primary_color'] ?? '#18d26e',
+					'accentColor'    => $config['accent_color'] ?? '#13a456',
+					'emailDomains'   => $config['email_domains'] ?? [],
+				];
+			}
+			$aAppData['WhiteLabelClients'] = $allClients;
+		}
 	}
 
 	public function adjustCSP(\SnappyMail\HTTP\CSP $oCSP): void
