@@ -258,11 +258,11 @@ html, body, #rl-app {
 
 /* Logo in sidebar */
 #V-MailFolderList .b-folders::before {
-	content: var(--wl-company-name, 'CloudGenZ');
+	content: 'CloudGenZ';
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	background: var(--wl-logo-bg, url('https://cloudgenz.com/assets/img/favicon.png') no-repeat left center);
+	background: url('https://cloudgenz.com/assets/img/favicon.png') no-repeat left center;
 	background-size: 28px 28px;
 	height: 32px;
 	margin: 12px 16px 8px;
@@ -271,6 +271,10 @@ html, body, #rl-app {
 	font-weight: 700;
 	color: #242424;
 	letter-spacing: -0.02em;
+}
+
+.wl-sidebar-active #V-MailFolderList .b-folders::before {
+	display: none;
 }
 
 #rl-left .b-toolbar {

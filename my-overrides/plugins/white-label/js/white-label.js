@@ -124,14 +124,30 @@
 
 	function applyAppBranding(config) {
 		if (!config) return;
-		const root = document.documentElement;
 
-		if (config.companyName) {
-			root.style.setProperty('--wl-company-name', "'" + config.companyName + "'");
+		const folders = document.querySelector('#V-MailFolderList .b-folders');
+		if (!folders) return;
+
+		// Hide the ::before pseudo-element
+		document.body.classList.add('wl-sidebar-active');
+
+		// Insert or update the branding element
+		let brandEl = document.getElementById('wl-sidebar-brand');
+		if (!brandEl) {
+			brandEl = document.createElement('div');
+			brandEl.id = 'wl-sidebar-brand';
+			brandEl.style.cssText = 'display:flex;align-items:center;gap:8px;height:32px;margin:12px 16px 8px;font-size:16px;font-weight:700;letter-spacing:-0.02em;';
+			folders.insertBefore(brandEl, folders.firstChild);
 		}
+
+		let html = '';
 		if (config.logoUrl) {
-			root.style.setProperty('--wl-logo-bg', "url('" + config.logoUrl + "') no-repeat left center");
+			html += '<img src="' + config.logoUrl + '" alt="" style="width:28px;height:28px;object-fit:contain;">';
 		}
+		if (config.companyName) {
+			html += '<span>' + config.companyName + '</span>';
+		}
+		brandEl.innerHTML = html;
 	}
 
 	function applyAll(config) {
