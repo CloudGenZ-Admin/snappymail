@@ -20,8 +20,8 @@ jobs:
     if: ${{ github.event.inputs.migrate_data == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Install lftp
-        run: sudo apt-get install -y lftp
+      - name: Install tools
+        run: sudo apt-get install -y lftp sshpass
 
       - name: Download data from old Hostinger
         run: |
@@ -34,24 +34,19 @@ jobs:
           "
           echo "Downloaded $(find migrated-data -type f | wc -l) files from old instance"
 
-      - name: Upload data to new VPS via SFTP
+      - name: Upload data to new VPS
+        env:
+          SSHPASS: ${{ secrets.NEW_FTP_PASS }}
         run: |
-          lftp -c "
-            set sftp:connect-program 'ssh -o StrictHostKeyChecking=no';
-            set net:max-retries 3;
-            open sftp://${{ secrets.NEW_FTP_HOST }};
-            user ${{ secrets.NEW_FTP_USER }} '${{ secrets.NEW_FTP_PASS }}';
-            mirror --reverse --verbose ./migrated-data/ /var/data/snappymail/;
-            quit
-          "
+          sshpass -e rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./migrated-data/ ${{ secrets.NEW_FTP_USER }}@${{ secrets.NEW_FTP_HOST }}:/var/data/snappymail/
 
   deploy:
     needs: migrate
     if: always() && (needs.migrate.result == 'success' || needs.migrate.result == 'skipped')
     runs-on: ubuntu-latest
     steps:
-      - name: Install lftp
-        run: sudo apt-get install -y lftp
+      - name: Install tools
+        run: sudo apt-get install -y sshpass
 
       - name: Checkout customizations
         uses: actions/checkout@v4
@@ -137,13 +132,8 @@ jobs:
       - name: Remove data folder from deploy
         run: rm -rf release/data
 
-      - name: Deploy via SFTP
+      - name: Deploy via rsync
+        env:
+          SSHPASS: ${{ secrets.NEW_FTP_PASS }}
         run: |
-          lftp -c "
-            set sftp:connect-program 'ssh -o StrictHostKeyChecking=no';
-            set net:max-retries 3;
-            open sftp://${{ secrets.NEW_FTP_HOST }};
-            user ${{ secrets.NEW_FTP_USER }} '${{ secrets.NEW_FTP_PASS }}';
-            mirror --reverse --verbose --delete ./release/ /var/www/snappymail/;
-            quit
-          "
+          sshpass -e rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" ./release/ ${{ secrets.NEW_FTP_USER }}@${{ secrets.NEW_FTP_HOST }}:/var/www/snappymail/
