@@ -34,22 +34,23 @@ jobs:
           "
           echo "Downloaded $(find migrated-data -type f | wc -l) files from old instance"
 
-      - name: Upload data to new VPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.NEW_FTP_HOST }}
-          username: ${{ secrets.NEW_FTP_USER }}
-          password: ${{ secrets.NEW_FTP_PASS }}
-          protocol: sftp
-          server-dir: /var/data/snappymail/
-          local-dir: ./migrated-data/
-          dangerous-clean-slate: false
+      - name: Upload data to new VPS via SFTP
+        run: |
+          lftp -c "
+            set sftp:connect-program 'ssh -o StrictHostKeyChecking=no';
+            open -u ${{ secrets.NEW_FTP_USER }},${{ secrets.NEW_FTP_PASS }} sftp://${{ secrets.NEW_FTP_HOST }};
+            mirror --reverse --verbose ./migrated-data/ /var/data/snappymail/;
+            quit
+          "
 
   deploy:
     needs: migrate
     if: always() && (needs.migrate.result == 'success' || needs.migrate.result == 'skipped')
     runs-on: ubuntu-latest
     steps:
+      - name: Install lftp
+        run: sudo apt-get install -y lftp
+
       - name: Checkout customizations
         uses: actions/checkout@v4
         with:
@@ -135,11 +136,10 @@ jobs:
         run: rm -rf release/data
 
       - name: Deploy via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.NEW_FTP_HOST }}
-          username: ${{ secrets.NEW_FTP_USER }}
-          password: ${{ secrets.NEW_FTP_PASS }}
-          protocol: sftp
-          server-dir: /var/www/snappymail/
-          local-dir: ./release/
+        run: |
+          lftp -c "
+            set sftp:connect-program 'ssh -o StrictHostKeyChecking=no';
+            open -u ${{ secrets.NEW_FTP_USER }},${{ secrets.NEW_FTP_PASS }} sftp://${{ secrets.NEW_FTP_HOST }};
+            mirror --reverse --verbose --delete ./release/ /var/www/snappymail/;
+            quit
+          "
