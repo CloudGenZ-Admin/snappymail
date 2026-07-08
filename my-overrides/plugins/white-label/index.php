@@ -106,10 +106,9 @@ class WhiteLabelPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 */
 	public function filterAppData(bool $bAdmin, array &$aAppData): void
 	{
-		$client = $this->detectClient();
-
-		// If user is authenticated, try email domain match too
+		// Only apply branding after authentication (not on login page)
 		if (!$bAdmin && !empty($aAppData['Auth'])) {
+			$client = $this->detectClient();
 			$email = $aAppData['Email'] ?? '';
 			if ($email) {
 				$emailClient = $this->detectClientByEmail($email);
@@ -117,23 +116,23 @@ class WhiteLabelPlugin extends \RainLoop\Plugins\AbstractPlugin
 					$client = $emailClient;
 				}
 			}
+
+			if ($client) {
+				$aAppData['WhiteLabel'] = [
+					'clientId'       => $client['_id'] ?? 'default',
+					'companyName'    => $client['company_name'] ?? '',
+					'title'          => $client['title'] ?? ($client['company_name'] ?? ''),
+					'logoUrl'        => $client['logo_url'] ?? '',
+					'logoWidth'      => $client['logo_width'] ?? '180px',
+					'faviconUrl'     => $client['favicon_url'] ?? '',
+					'loadingMessage' => $client['loading_message'] ?? '',
+					'primaryColor'   => $client['primary_color'] ?? '#18d26e',
+					'accentColor'    => $client['accent_color'] ?? '#13a456',
+				];
+			}
 		}
 
-		if ($client) {
-			$aAppData['WhiteLabel'] = [
-				'clientId'       => $client['_id'] ?? 'default',
-				'companyName'    => $client['company_name'] ?? '',
-				'title'          => $client['title'] ?? ($client['company_name'] ?? ''),
-				'logoUrl'        => $client['logo_url'] ?? '',
-				'logoWidth'      => $client['logo_width'] ?? '180px',
-				'faviconUrl'     => $client['favicon_url'] ?? '',
-				'loadingMessage' => $client['loading_message'] ?? '',
-				'primaryColor'   => $client['primary_color'] ?? '#18d26e',
-				'accentColor'    => $client['accent_color'] ?? '#13a456',
-			];
-		}
-
-		// Pass all clients for dynamic login branding
+		// Pass all clients for dynamic login branding (needed on login page)
 		if (!$bAdmin) {
 			$allClients = [];
 			foreach ($this->getClientsConfig() as $id => $config) {
